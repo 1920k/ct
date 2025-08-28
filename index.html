@@ -35,7 +35,11 @@ h2 {
     color: #7b1fa2;
     margin-top: 32px;
 }
-
+.H2_jogo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 blockquote {
     background: #ede7f6;
     border-left: 6px solid #7b1fa2;
@@ -61,8 +65,8 @@ img {
 }
 
 .gallery .img {
-    height: 50rem;
-    width: 50rem;
+    height: 25rem;
+    width: 25rem;
 }
 
 button {
@@ -151,6 +155,7 @@ h1 {
     grid-template-columns: repeat(4, 100px);
     grid-gap: 15px;
     margin-top: 20px;
+    padding: 10px;
     align-items: center;
     justify-content: center;
 }
@@ -177,6 +182,17 @@ h1 {
 .card.matched {
     background: #95a5a6;
     cursor: default;
+}
+@media screen {
+    .game-container {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+
+    .card {
+        width: 80px;
+        height: 80px;
+        font-size: 1.5em;
+    }
 }
 </style>
 
@@ -226,7 +242,7 @@ h1 {
         </div>
 
         <div>
-            <h2>Jogo da Memória</h2>
+            <h2 class="H2_jogo">Jogo da Memória</h2>
             <div class="game-container" id="game"></div>
             <p id="message" style="text-align:center; font-weight:bold;"></p>
         </div>
