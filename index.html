@@ -1,190 +1,344 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>A Mulher e o Dragão - Apocalipse 12</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      background: linear-gradient(135deg, #f3e7fe 0%, #e3f0ff 100%);
-      color: #333;
-    }
-
-    header {
-      background: linear-gradient(90deg, #7b1fa2 60%, #512da8 100%);
-      color: white;
-      padding: 32px 20px;
-      text-align: center;
-      box-shadow: 0 2px 8px #ccc;
-    }
-
-    section {
-      padding: 32px 20px;
-      max-width: 1000px;
-      margin: 32px auto;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px #b39ddb55;
-    }
-
-    h2 {
-      color: #7b1fa2;
-      margin-top: 32px;
-    }
-
-    blockquote {
-      background: #ede7f6;
-      border-left: 6px solid #7b1fa2;
-      padding: 16px 24px;
-      margin: 24px 0;
-      font-style: italic;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-      height: 31rem;
-      margin: 24px auto;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px #ccc;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin-top: 20px;
-    }
-
-    .gallery .img{
-        height: 50rem;
-        width: 50rem;
-    }
-    button {
-      display: block;
-      margin: 24px auto 0 auto;
-      padding: 12px 28px;
-      background: #7b1fa2;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    button:hover {
-      background: #512da8;
-    }
-
-    .curiosidade {
-      margin: 18px auto;
-      max-width: 600px;
-      background: #fffde7;
-      border-left: 5px solid #ffd54f;
-      padding: 16px 20px;
-      border-radius: 8px;
-      font-size: 1.08em;
-      color: #7b1fa2;
-      display: none;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    li {
-      margin-bottom: 8px;
-    }
-
-    .timeline {
-      background: #ede7f6;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    .timeline h3 {
-      margin-top: 0;
-      color: #5e35b1;
-    }
-
-    footer {
-      background: #ddd;
-      text-align: center;
-      padding: 16px;
-      margin-top: 40px;
-      font-size: 1em;
-      border-top: 1px solid #ccc;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A Mulher e o Dragão - Apocalipse 12</title>
 </head>
+<style>
+    body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #f3e7fe 0%, #e3f0ff 100%);
+    color: #333;
+}
+
+header {
+    background: linear-gradient(90deg, #7b1fa2 60%, #512da8 100%);
+    color: white;
+    padding: 32px 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px #ccc;
+}
+
+section {
+    padding: 32px 20px;
+    max-width: 1000px;
+    margin: 32px auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px #b39ddb55;
+}
+
+h2 {
+    color: #7b1fa2;
+    margin-top: 32px;
+}
+
+blockquote {
+    background: #ede7f6;
+    border-left: 6px solid #7b1fa2;
+    padding: 16px 24px;
+    margin: 24px 0;
+    font-style: italic;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: 31rem;
+    margin: 24px auto;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px #ccc;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.gallery .img {
+    height: 50rem;
+    width: 50rem;
+}
+
+button {
+    display: block;
+    margin: 24px auto 0 auto;
+    padding: 12px 28px;
+    background: #7b1fa2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #512da8;
+}
+
+.curiosidade {
+    /* margin: 18px auto; */
+    max-width: 100%;
+    max-height: 100%;
+    background: #fffde7;
+    border-left: 5px solid #ffd54f;
+    /* padding: 16px 20px; */
+    border-radius: 8px;
+    font-size: 1.08em;
+    color: #7b1fa2;
+    display: flex;
+    /* Permite múltiplos elementos lado a lado */
+    flex-wrap: wrap;
+    /* Faz as imagens quebrarem linha se necessário */
+    gap: 10px;
+    /* Espaço entre as imagens */
+    padding: 16px;
+    /* Espaço interno */
+}
+
+.curiosidade img {
+    height: 25rem;
+    width: 25rem;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+.timeline {
+    background: #ede7f6;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.timeline h3 {
+    margin-top: 0;
+    color: #5e35b1;
+}
+
+footer {
+    background: #ddd;
+    text-align: center;
+    padding: 16px;
+    margin-top: 40px;
+    font-size: 1em;
+    border-top: 1px solid #ccc;
+}
+
+
+/* elementodo do jogo */
+
+
+h1 {
+    text-align: center;
+    color: #34495e;
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-gap: 15px;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 100px;
+    height: 100px;
+    background: #3498db;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2em;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.card.flipped {
+    background: #2ecc71;
+}
+
+.card.matched {
+    background: #95a5a6;
+    cursor: default;
+}
+</style>
+
 <body>
 
-<header>
-  <h1>A Mulher e o Dragão</h1>
-  <p>Uma visão profética em Apocalipse 12</p>
-</header>
+    <header>
+        <h1>A Mulher e o Dragão</h1>
+        <p>Uma visão profética em Apocalipse 12</p>
+    </header>
 
-<section>
-  <h2>Resumo da Visão</h2>
-  <p>Em Apocalipse 12, João descreve uma visão poderosa: uma mulher grávida, vestida do sol, com a lua debaixo de seus pés e uma coroa de doze estrelas, prestes a dar à luz. Um grande dragão vermelho aparece, tentando devorar o filho assim que ele nascer.</p>
+    <section>
+        <h2>Resumo da Visão</h2>
+        <p>Em Apocalipse 12, João descreve uma visão poderosa: uma mulher grávida, vestida do sol, com a lua debaixo de
+            seus pés e uma coroa de doze estrelas, prestes a dar à luz. Um grande dragão vermelho aparece, tentando
+            devorar o filho assim que ele nascer.</p>
 
-  <h2>Texto Bíblico (Apocalipse 12:1-6)</h2>
-  <blockquote>
-    Apareceu no céu um grande sinal: uma mulher vestida do sol, com a lua debaixo dos seus pés e uma coroa de doze estrelas sobre a cabeça...
-  </blockquote>
+        <h2>Texto Bíblico (Apocalipse 12:1-6)</h2>
+        <blockquote>
+            Apareceu no céu um grande sinal: uma mulher vestida do sol, com a lua debaixo dos seus pés e uma coroa de
+            doze estrelas sobre a cabeça...
+        </blockquote>
 
-  <h2>Interpretação Simbólica</h2>
-  <ul>
-    <li><strong>Mulher:</strong> O povo de Deus (Israel/Igreja)</li>
-    <li><strong>Dragão:</strong> Satanás e o mal</li>
-    <li><strong>Filho homem:</strong> Jesus Cristo</li>
-    <li><strong>Coroa de 12 estrelas:</strong> 12 tribos / 12 apóstolos</li>
-    <li><strong>Deserto:</strong> Lugar de proteção e preparação</li>
-  </ul>
+        <h2>Interpretação Simbólica</h2>
+        <ul>
+            <li><strong>Mulher:</strong> O povo de Deus (Israel/Igreja)</li>
+            <li><strong>Dragão:</strong> Satanás e o mal</li>
+            <li><strong>Filho homem:</strong> Jesus Cristo</li>
+            <li><strong>Coroa de 12 estrelas:</strong> 12 tribos / 12 apóstolos</li>
+            <li><strong>Deserto:</strong> Lugar de proteção e preparação</li>
+        </ul>
 
-  <h2>Galeria de Imagens</h2>
-  <div class="gallery">
-    <img src="https://www.goodsalt.com/media/catalog/product/cache/72eeda554d65337da0ae7df201fead63/r/e/revelation-12-woman-and-the-dragon-GoodSalt-pcmas0029_1.jpg" alt="Mulher e o dragão – estilo moderno">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Dionysiou_monastery_-_Apocalypse_12_Woman_and_dragon.jpg" alt="Fresco ortodoxo – século XVI">
-    <img src="https://i.pinimg.com/736x/97/ae/54/97ae5403542cb70c6b767ea66d53c681.jpg" alt="Arte simbólica com mulher e lua">
-    <img src="https://c8.alamy.com/comp/2T8KTDC/new-testament-luther-bible-the-apocalyptic-woman-and-the-dragon-revelation-of-john-12-1-5-georg-lemberger-landshut-around-14901500-around-1540-leipzig-1524-print-woodcut-colored-sheet-each-175x115cm-2T8KTDC.jpg" alt="Ilustração apocalíptica colorida">
-    
-    <img src="https://i0.wp.com/profetico.info/wp-content/uploads/2023/09/a-mulher-e-o-dragao-scaled.jpg?fit=2560%2C1412&ssl=1" alt="Ilustração apocalíptica colorida">
-    
-    <img src="https://www.meisterdrucke.pt/kunstwerke/1260px/William_Blake_-_The_Great_Red_Dragon_and_the_Woman_Clothed_with_the_Sun_%28Rev_12_1-4%29_c1803-05_%28b_-_%28MeisterDrucke-636435%29.jpg" alt="Ilustração apocalíptica colorida">
-  </div>
 
-  <button id="curiosidadeBtn">Mostrar Curiosidade</button>
-  <div id="curiosidade" class="curiosidade"></div>
 
-  <h2>Linha do Tempo da Visão</h2>
-  <div class="timeline">
-    <h3>1. A Mulher e o Dragão (v.1-6)</h3>
-    <p>Mulher grávida prestes a dar à luz, dragão tentando atacar.</p>
+        <button id="curiosidadeBtn">Mostrar Galeria</button>
+        <div id="curiosidade" class="curiosidade"></div>
 
-    <h3>2. A Guerra no Céu (v.7-10)</h3>
-    <p>Miguel e seus anjos lutam contra o dragão e o expulsam do céu.</p>
+        <h2>Linha do Tempo da Visão</h2>
+        <div class="timeline">
+            <h3>1. A Mulher e o Dragão (v.1-6)</h3>
+            <p>Mulher grávida prestes a dar à luz, dragão tentando atacar.</p>
 
-    <h3>3. A Perseguição (v.11-17)</h3>
-    <p>O dragão persegue a mulher, mas ela recebe asas para fugir ao deserto.</p>
-  </div>
-</section>
+            <h3>2. A Guerra no Céu (v.7-10)</h3>
+            <p>Miguel e seus anjos lutam contra o dragão e o expulsam do céu.</p>
 
-<footer>
-  <p><strong>Versículos relacionados:</strong> Gênesis 3:15 • Salmo 2:9 • Apocalipse 12:17</p>
-  <p>&copy; 2025 Estudo Bíblico • Feira Catequética</p>
-</footer>
+            <h3>3. A Perseguição (v.11-17)</h3>
+            <p>O dragão persegue a mulher, mas ela recebe asas para fugir ao deserto.</p>
+        </div>
 
-<script>
-  document.getElementById('curiosidadeBtn').addEventListener('click', function () {
-    const curiosidade = document.getElementById('curiosidade');
-    curiosidade.textContent = "Curiosidade: O número 12 aparece várias vezes em Apocalipse, simbolizando a plenitude de Deus — 12 tribos de Israel, 12 apóstolos, 12 estrelas da coroa da mulher.";
-    curiosidade.style.display = 'block';
-  });
-</script>
+        <div>
+            <h2>Jogo da Memória</h2>
+            <div class="game-container" id="game"></div>
+            <p id="message" style="text-align:center; font-weight:bold;"></p>
+        </div>
 
+    </section>
+
+    <footer>
+        <p><strong>Versículos relacionados:</strong> Gênesis 3:15 • Salmo 2:9 • Apocalipse 12:17</p>
+        <p>&copy; 2025 Estudo Bíblico • Feira Catequética</p>
+    </footer>
+
+
+
+    <script>
+        // Configuração do jogo
+        const values = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H'];
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+        let matchedPairs = 0;
+
+
+        // Função para embaralhar as cartas
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        // Função para criar o tabuleiro
+        function createBoard() {
+            const game = document.getElementById('game');
+            const shuffled = shuffle(values);
+
+            shuffled.forEach((value) => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.value = value;
+                card.addEventListener('click', flipCard);
+                game.appendChild(card);
+            });
+        }
+        function flipCard() {
+            if (lockBoard) return;
+            if (this === firstCard) return;
+
+            this.classList.add('flipped');
+            this.textContent = this.dataset.value;
+
+            if (!firstCard) {
+                firstCard = this;
+                return;
+            }
+
+            secondCard = this;
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if (firstCard.dataset.value === secondCard.dataset.value) {
+                firstCard.classList.add('matched');
+                secondCard.classList.add('matched');
+                resetBoard(true);
+                matchedPairs++;
+                if (matchedPairs === values.length / 2) {
+                    document.getElementById('message').textContent = '🎉 Parabéns! Você encontrou todos os pares!';
+                }
+            } else {
+                lockBoard = true;
+                setTimeout(() => {
+                    firstCard.classList.remove('flipped');
+                    secondCard.classList.remove('flipped');
+                    firstCard.textContent = '';
+                    secondCard.textContent = '';
+                    resetBoard();
+                }, 1000);
+            }
+        }
+
+        function resetBoard(match = false) {
+            if (!match) {
+                firstCard = null;
+                secondCard = null;
+                lockBoard = false;
+            } else {
+                firstCard = null;
+                secondCard = null;
+                lockBoard = false;
+            }
+        }
+
+        // Iniciar o jogo
+        createBoard();
+
+        // galeria de imagens
+        document.getElementById('curiosidadeBtn').addEventListener('click', function () {
+            const curiosidade = document.getElementById('curiosidade');
+            curiosidade.innerHTML = `
+        <img src="../catequese/2.jpg" alt="">
+        <img src="../catequese/3.jpg" alt="">
+        <img src="../catequese/4.jpg" alt="">
+        <img src="../catequese/5.jpg" alt="">
+        <img src="../catequese/6.jpg" alt="">
+        <img src="../catequese/7.jpg" alt="">
+        <img src="../catequese/8.jpg" alt="">
+        <img src="../catequese/9.jpg" alt="">
+        <img src="../catequese/10.jpg" alt="">
+        <img src="../catequese/11.jpg" alt="">
+        <img src="../catequese/12.jpg" alt="">
+        <img src="../catequese/13.jpg" alt="">
+    `;
+            curiosidade.style.display = 'flex';
+        });
+    </script>
 </body>
+
 </html>
