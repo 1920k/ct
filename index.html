@@ -199,8 +199,10 @@ h1 {
 <body>
 
     <header>
-        <h1>A Mulher e o Dragão</h1>
-        <p>Uma visão profética em Apocalipse 12</p>
+       <h1>
+  <span style="color:#e91e63; font-weight:bold;">A Mulher</span> e 
+  <span style="color:#ff9800; font-weight:bold;">o Dragão</span>
+</h1>
     </header>
 
     <section>
@@ -224,7 +226,13 @@ h1 {
             <li><strong>Deserto:</strong> Lugar de proteção e preparação</li>
         </ul>
 
-
+        <h2>História da Medalha Milagrosa</h2>
+<p>
+  A Medalha Milagrosa surgiu após aparições da Virgem Maria a Santa Catarina Labouré, em Paris, no ano de 1830.
+  Maria pediu que fosse cunhada uma medalha com sua imagem e a inscrição: 
+  <em>“Ó Maria concebida sem pecado, rogai por nós que recorremos a vós”</em>.
+  Desde então, milhões de pessoas relataram graças e milagres atribuídos ao uso da medalha com fé.
+</p>
 
         <button id="curiosidadeBtn">Mostrar Galeria</button>
         <div id="curiosidade" class="curiosidade"></div>
@@ -258,7 +266,11 @@ h1 {
 
     <script>
         // Configuração do jogo
-        const values = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H'];
+        const values = [
+  'Fé', 'Fé', 'Graça', 'Graça', 'Dragão', 'Dragão',
+  'Mulher', 'Mulher', 'Cristo', 'Cristo', 'Deserto', 'Deserto',
+  'Estrela', 'Estrela', 'Anjo', 'Anjo'
+];
         let firstCard = null;
         let secondCard = null;
         let lockBoard = false;
@@ -356,5 +368,9 @@ h1 {
         });
     </script>
 </body>
-
+<audio autoplay loop>
+  <source src="musica.mp3" type="audio/mpeg">
+  Seu navegador não suporta áudio.
+</audio>
 </html>
+
