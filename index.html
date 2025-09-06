@@ -194,6 +194,53 @@ h1 {
         font-size: 1.5em;
     }
 }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fdf6ec;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(10, 40px);
+      gap: 5px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .cell {
+      width: 40px;
+      height: 40px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      line-height: 40px;
+      text-transform: uppercase;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+    }
+    .selected {
+      background-color: #ffeaa7;
+    }
+    .found {
+      background-color: #81ecec;
+    }
+    .word-list {
+      margin-top: 20px;
+    }
+    .word-list li.found {
+      text-decoration: line-through;
+      color: green;
+    }
+    #currentWord {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #2d3436;
+    }
+  
 </style>
 
 <body>
@@ -260,6 +307,22 @@ h1 {
             <p id="message" style="text-align:center; font-weight:bold;"></p>
         </div>
 
+         <h1>Caça-palavras Católico</h1>
+  <div class="grid" id="grid"></div>
+  <div id="currentWord">Palavra atual: <strong></strong></div>
+  <div class="word-list">
+    <h3>Encontre as palavras:</h3>
+    <ul id="words">
+      <li>JESUS</li>
+      <li>MARIA</li>
+      <li>ROSARIO</li>
+      <li>FE</li>
+      <li>ORACAO</li>
+      <li>EVANGELHO</li>
+    </ul>
+  </div>
+
+
     </section>
 
     <footer>
@@ -270,6 +333,84 @@ h1 {
 
 
     <script>
+        
+    const words = ["JESUS", "MARIA", "ROSARIO", "FE", "ORACAO", "EVANGELHO"];
+    const gridSize = 10;
+    const grid = Array(gridSize * gridSize).fill('');
+    const selectedCells = [];
+    let currentWord = "";
+
+    function placeWord(word) {
+      let placed = false;
+      while (!placed) {
+        const dir = Math.random() < 0.5 ? 1 : gridSize;
+        const start = Math.floor(Math.random() * grid.length);
+        let fits = true;
+        for (let i = 0; i < word.length; i++) {
+          const index = start + i * dir;
+          if (index >= grid.length || (dir === 1 && Math.floor(index / gridSize) !== Math.floor(start / gridSize))) {
+            fits = false;
+            break;
+          }
+          if (grid[index] !== '' && grid[index] !== word[i]) {
+            fits = false;
+            break;
+          }
+        }
+        if (fits) {
+          for (let i = 0; i < word.length; i++) {
+            grid[start + i * dir] = word[i];
+          }
+          placed = true;
+        }
+      }
+    }
+
+    words.forEach(placeWord);
+
+    for (let i = 0; i < grid.length; i++) {
+      if (grid[i] === '') {
+        grid[i] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+      }
+    }
+
+    const gridContainer = document.getElementById("grid");
+    grid.forEach((letter, index) => {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.textContent = letter;
+      cell.dataset.index = index;
+      cell.addEventListener("click", () => {
+        if (!cell.classList.contains("selected")) {
+          cell.classList.add("selected");
+          selectedCells.push(cell);
+          currentWord += cell.textContent;
+          document.querySelector("#currentWord strong").textContent = currentWord;
+
+          if (words.includes(currentWord)) {
+            selectedCells.forEach(c => c.classList.add("found"));
+            document.querySelectorAll("#words li").forEach(li => {
+              if (li.textContent === currentWord) {
+                li.classList.add("found");
+              }
+            });
+            selectedCells.length = 0;
+            currentWord = "";
+            document.querySelector("#currentWord strong").textContent = "";
+          }
+        }
+      });
+      gridContainer.appendChild(cell);
+    });
+
+    // Reset on double click
+    gridContainer.addEventListener("dblclick", () => {
+      selectedCells.forEach(c => c.classList.remove("selected"));
+      selectedCells.length = 0;
+      currentWord = "";
+      document.querySelector("#currentWord strong").textContent = "";
+    });
+  
         // Configuração do jogo
         const values = [
   'Fé', 'Fé', 'Graça', 'Graça', 'Dragão', 'Dragão',
@@ -378,6 +519,7 @@ h1 {
 </audio>
 </body>
 </html>
+
 
 
 
