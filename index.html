@@ -17,15 +17,15 @@
     header {
       background: linear-gradient(90deg, #7b1fa2 60%, #512da8 100%);
       color: white;
-      padding: 24px 12px;
+      padding: 20px;
       text-align: center;
       box-shadow: 0 2px 8px #ccc;
     }
 
     section {
-      padding: 24px 16px;
+      padding: 20px;
       max-width: 900px;
-      margin: 24px auto;
+      margin: 20px auto;
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 24px #b39ddb55;
@@ -34,127 +34,37 @@
     h1,
     h2 {
       color: #7b1fa2;
-      margin: 16px 0;
       text-align: center;
-    }
-
-    blockquote {
-      background: #ede7f6;
-      border-left: 6px solid #7b1fa2;
-      padding: 16px;
-      margin: 20px 0;
-      font-style: italic;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      margin: 16px auto;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px #ccc;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .gallery img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    button {
-      display: block;
-      margin: 16px auto;
-      padding: 12px 20px;
-      background: #7b1fa2;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.2s;
-      width: 100%;
-      max-width: 280px;
-    }
-
-    button:hover {
-      background: #512da8;
-    }
-
-    .curiosidade {
-      background: #fffde7;
-      border-left: 5px solid #ffd54f;
-      border-radius: 8px;
-      font-size: 1em;
-      color: #7b1fa2;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 12px;
-      justify-content: center;
-    }
-
-    .curiosidade img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    li {
-      margin-bottom: 6px;
-    }
-
-    .timeline {
-      background: #ede7f6;
-      padding: 16px;
-      border-radius: 10px;
       margin: 16px 0;
     }
 
-    .timeline h3 {
-      margin: 10px 0;
-      color: #5e35b1;
-    }
+    /* --- Jogos --- */
 
-    footer {
-      background: #ddd;
-      text-align: center;
-      padding: 16px;
-      font-size: 0.9em;
-      border-top: 1px solid #ccc;
-    }
-
-    /* Jogos */
+    /* 🎴 Jogo da Memória */
     .game-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
       gap: 10px;
-      margin: 16px auto;
-      padding: 10px;
-      max-width: 400px;
+      margin: 20px auto;
+      max-width: 500px;
     }
 
     .card {
+      aspect-ratio: 1 / 1;
       background: #3498db;
-      border-radius: 8px;
+      border-radius: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
       color: white;
       font-size: 1.2em;
       cursor: pointer;
-      height: 70px;
+      user-select: none;
+      transition: transform 0.2s;
+    }
+
+    .card:active {
+      transform: scale(0.95);
     }
 
     .card.flipped {
@@ -166,22 +76,27 @@
       cursor: default;
     }
 
+    /* 🔤 Caça-palavras */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(28px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(36px, 1fr));
       gap: 4px;
-      justify-content: center;
-      margin: 10px 0;
+      margin: 10px auto;
+      max-width: 360px;
     }
 
     .cell {
       aspect-ratio: 1 / 1;
       background: #fff;
       border: 1px solid #ccc;
-      font-size: 0.8em;
+      font-size: 1em;
+      font-weight: bold;
+      text-align: center;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: background 0.2s;
     }
 
     .cell.selected {
@@ -190,27 +105,67 @@
 
     .cell.found {
       background: #81ecec;
+      color: #2d3436;
+    }
+
+    /* ⛓ Jogo da Forca */
+    #word,
+    #wordDisplay {
+      font-size: 1.5em;
+      letter-spacing: 6px;
+      margin: 15px 0;
+      text-align: center;
+    }
+
+    #letters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
     }
 
     #letters button {
-      margin: 3px;
-      padding: 8px;
-      font-size: 0.9em;
-      border-radius: 6px;
+      flex: 1 1 calc(20% - 6px);
+      max-width: 60px;
+      padding: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background: #7b1fa2;
+      color: white;
+      cursor: pointer;
+      transition: background 0.2s;
     }
 
-    @media (min-width: 768px) {
-      section {
-        padding: 32px;
-      }
+    #letters button:active {
+      background: #512da8;
+    }
 
+    #letters button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    #hangman,
+    #message {
+      margin-top: 15px;
+      font-size: 1.2em;
+      text-align: center;
+    }
+
+    /* Responsividade extra */
+    @media (min-width: 768px) {
       .card {
-        height: 100px;
         font-size: 1.5em;
       }
 
       .cell {
-        font-size: 1em;
+        font-size: 1.1em;
+      }
+
+      #letters button {
+        flex: 1 1 calc(10% - 6px);
       }
     }
   </style>
@@ -221,8 +176,29 @@
     <h1><span style="color:#ff9800;">A Mulher</span> e o Dragão</h1>
   </header>
 
-  <!-- Conteúdo original aqui -->
-  <!-- ... seu conteúdo + jogos permanece igual, apenas o CSS foi otimizado para mobile -->
+  <section>
+    <h2 class="H2_jogo">🎴 Jogo da Memória</h2>
+    <div class="game-container" id="game"></div>
+    <p id="message"></p>
+
+    <h2>🔤 Caça-palavras Católico</h2>
+    <div class="grid" id="grid"></div>
+    <div id="currentWord">Palavra atual: <strong></strong></div>
+    <ul id="words">
+      <li>JESUS</li>
+      <li>MARIA</li>
+      <li>ROSARIO</li>
+      <li>FE</li>
+      <li>ORACAO</li>
+      <li>EVANGELHO</li>
+    </ul>
+
+    <h2>⛓ Jogo da Forca Católico</h2>
+    <div id="word">_ _ _ _ _</div>
+    <div id="letters"></div>
+    <div id="hangman">Erros: 0 de 6</div>
+    <div id="message"></div>
+  </section>
 
 </body>
 </html>
