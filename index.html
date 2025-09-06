@@ -17,40 +17,81 @@
     header {
       background: linear-gradient(90deg, #7b1fa2 60%, #512da8 100%);
       color: white;
-      padding: 20px;
+      padding: 24px;
       text-align: center;
       box-shadow: 0 2px 8px #ccc;
     }
 
     section {
       padding: 20px;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 20px auto;
       background: white;
-      border-radius: 12px;
+      border-radius: 16px;
       box-shadow: 0 4px 24px #b39ddb55;
     }
 
-    h1,
     h2 {
       color: #7b1fa2;
+      margin-top: 32px;
       text-align: center;
-      margin: 16px 0;
     }
 
-    /* --- Jogos --- */
+    blockquote {
+      background: #ede7f6;
+      border-left: 6px solid #7b1fa2;
+      padding: 16px 24px;
+      margin: 24px 0;
+      font-style: italic;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 24px auto;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #ccc;
+    }
+
+    .curiosidade {
+      background: #fffde7;
+      border-left: 5px solid #ffd54f;
+      border-radius: 8px;
+      color: #7b1fa2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 16px;
+    }
+
+    .curiosidade img {
+      height: 8rem;
+      width: 8rem;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    footer {
+      background: #ddd;
+      text-align: center;
+      padding: 16px;
+      margin-top: 40px;
+      font-size: 1em;
+      border-top: 1px solid #ccc;
+    }
 
     /* 🎴 Jogo da Memória */
     .game-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
       gap: 10px;
+      max-width: 400px;
       margin: 20px auto;
-      max-width: 500px;
     }
 
     .card {
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 1/1;
       background: #3498db;
       border-radius: 10px;
       display: flex;
@@ -79,14 +120,14 @@
     /* 🔤 Caça-palavras */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(36px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(34px, 1fr));
       gap: 4px;
-      margin: 10px auto;
       max-width: 360px;
+      margin: 10px auto;
     }
 
     .cell {
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 1/1;
       background: #fff;
       border: 1px solid #ccc;
       font-size: 1em;
@@ -96,7 +137,6 @@
       align-items: center;
       justify-content: center;
       border-radius: 4px;
-      transition: background 0.2s;
     }
 
     .cell.selected {
@@ -105,19 +145,34 @@
 
     .cell.found {
       background: #81ecec;
-      color: #2d3436;
     }
 
-    /* ⛓ Jogo da Forca */
-    #word,
-    #wordDisplay {
-      font-size: 1.5em;
-      letter-spacing: 6px;
-      margin: 15px 0;
+    .word-list li.found {
+      text-decoration: line-through;
+      color: green;
+    }
+
+    #currentWord {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #2d3436;
       text-align: center;
     }
 
-    #letters {
+    /* ⛓ Jogos da Forca */
+    .forca {
+      margin: 20px auto;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .word {
+      font-size: 1.6em;
+      letter-spacing: 6px;
+      margin: 15px 0;
+    }
+
+    .letters {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -125,7 +180,7 @@
       margin-top: 10px;
     }
 
-    #letters button {
+    .letters button {
       flex: 1 1 calc(20% - 6px);
       max-width: 60px;
       padding: 10px;
@@ -135,37 +190,30 @@
       background: #7b1fa2;
       color: white;
       cursor: pointer;
-      transition: background 0.2s;
     }
 
-    #letters button:active {
-      background: #512da8;
-    }
-
-    #letters button:disabled {
+    .letters button:disabled {
       background: #ccc;
       cursor: not-allowed;
     }
 
     #hangman,
-    #message {
+    .msg {
       margin-top: 15px;
       font-size: 1.2em;
-      text-align: center;
     }
 
-    /* Responsividade extra */
     @media (min-width: 768px) {
+      .letters button {
+        flex: 1 1 calc(10% - 6px);
+      }
+
       .card {
-        font-size: 1.5em;
+        font-size: 1.4em;
       }
 
       .cell {
         font-size: 1.1em;
-      }
-
-      #letters button {
-        flex: 1 1 calc(10% - 6px);
       }
     }
   </style>
@@ -177,14 +225,29 @@
   </header>
 
   <section>
-    <h2 class="H2_jogo">🎴 Jogo da Memória</h2>
-    <div class="game-container" id="game"></div>
-    <p id="message"></p>
+    <h2>Resumo da Visão</h2>
+    <p>Em Apocalipse 12, João descreve uma visão poderosa: uma mulher grávida...</p>
 
-    <h2>🔤 Caça-palavras Católico</h2>
-    <div class="grid" id="grid"></div>
+    <h2>Texto Bíblico (Apocalipse 12:1-6)</h2>
+    <blockquote>
+      Apareceu no céu um grande sinal: uma mulher vestida do sol...
+    </blockquote>
+
+    <h2>Interpretação Simbólica</h2>
+    <ul>
+      <li><strong>Mulher:</strong> O povo de Deus</li>
+      <li><strong>Dragão:</strong> Satanás</li>
+      <li><strong>Filho homem:</strong> Jesus Cristo</li>
+    </ul>
+
+    <h2>Jogo da Memória</h2>
+    <div class="game-container" id="memory"></div>
+    <p id="memoryMsg" style="text-align:center; font-weight:bold;"></p>
+
+    <h2>Caça-palavras Católico</h2>
+    <div class="grid" id="wordsearch"></div>
     <div id="currentWord">Palavra atual: <strong></strong></div>
-    <ul id="words">
+    <ul id="wordlist">
       <li>JESUS</li>
       <li>MARIA</li>
       <li>ROSARIO</li>
@@ -193,12 +256,184 @@
       <li>EVANGELHO</li>
     </ul>
 
-    <h2>⛓ Jogo da Forca Católico</h2>
-    <div id="word">_ _ _ _ _</div>
-    <div id="letters"></div>
-    <div id="hangman">Erros: 0 de 6</div>
-    <div id="message"></div>
+    <h2>Jogo da Forca Católico</h2>
+    <div class="forca">
+      <div class="word" id="catolicaWord"></div>
+      <div class="letters" id="catolicaLetters"></div>
+      <div id="hangman">Erros: 0 de 6</div>
+      <div class="msg" id="catolicaMsg"></div>
+    </div>
+
+    <h2>Jogo da Forca Bíblico</h2>
+    <div class="forca">
+      <div class="word" id="biblicaWord"></div>
+      <div class="letters" id="biblicaLetters"></div>
+      <div class="msg" id="biblicaMsg"></div>
+    </div>
   </section>
 
+  <footer>
+    <p><strong>Versículos:</strong> Gênesis 3:15 • Apocalipse 12:17</p>
+  </footer>
+
+  <audio autoplay loop>
+    <source src="./1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    /* 🎴 Jogo da Memória */
+    const valores = ['Fé', 'Graça', 'Dragão', 'Mulher', 'Cristo', 'Deserto', 'Estrela', 'Anjo'];
+    let pares = [...valores, ...valores];
+    pares.sort(() => Math.random() - 0.5);
+
+    let primeira = null, segunda = null, bloqueado = false, acertos = 0;
+    const board = document.getElementById("memory");
+
+    pares.forEach(valor => {
+      const carta = document.createElement("div");
+      carta.className = "card";
+      carta.dataset.valor = valor;
+      carta.addEventListener("click", virar);
+      board.appendChild(carta);
+    });
+
+    function virar() {
+      if (bloqueado || this.classList.contains("flipped")) return;
+      this.textContent = this.dataset.valor;
+      this.classList.add("flipped");
+      if (!primeira) {
+        primeira = this;
+        return;
+      }
+      segunda = this;
+      verificar();
+    }
+
+    function verificar() {
+      if (primeira.dataset.valor === segunda.dataset.valor) {
+        primeira.classList.add("matched");
+        segunda.classList.add("matched");
+        acertos++;
+        if (acertos === valores.length) {
+          document.getElementById("memoryMsg").textContent = "🎉 Parabéns, terminou!";
+        }
+        resetar();
+      } else {
+        bloqueado = true;
+        setTimeout(() => {
+          primeira.textContent = "";
+          segunda.textContent = "";
+          primeira.classList.remove("flipped");
+          segunda.classList.remove("flipped");
+          resetar();
+        }, 800);
+      }
+    }
+
+    function resetar() {
+      [primeira, segunda, bloqueado] = [null, null, false];
+    }
+
+    /* 🔤 Caça-palavras */
+    const palavras = ["JESUS", "MARIA", "ROSARIO", "FE", "ORACAO", "EVANGELHO"];
+    const gridSize = 10;
+    const grid = Array(gridSize * gridSize).fill('');
+    const selecionadas = [];
+    let atual = "";
+
+    function colocar(palavra) {
+      let ok = false;
+      while (!ok) {
+        const dir = Math.random() < 0.5 ? 1 : gridSize;
+        const inicio = Math.floor(Math.random() * grid.length);
+        let cabe = true;
+        for (let i = 0; i < palavra.length; i++) {
+          const idx = inicio + i * dir;
+          if (idx >= grid.length || (dir === 1 && Math.floor(idx / gridSize) !== Math.floor(inicio / gridSize))) {
+            cabe = false; break;
+          }
+          if (grid[idx] && grid[idx] !== palavra[i]) { cabe = false; break; }
+        }
+        if (cabe) {
+          for (let i = 0; i < palavra.length; i++) grid[inicio + i * dir] = palavra[i];
+          ok = true;
+        }
+      }
+    }
+    palavras.forEach(colocar);
+    for (let i = 0; i < grid.length; i++) if (!grid[i]) grid[i] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    const container = document.getElementById("wordsearch");
+    grid.forEach((letra, idx) => {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.textContent = letra;
+      cell.addEventListener("click", () => {
+        cell.classList.add("selected");
+        selecionadas.push(cell);
+        atual += letra;
+        document.querySelector("#currentWord strong").textContent = atual;
+        if (palavras.includes(atual)) {
+          selecionadas.forEach(c => c.classList.add("found"));
+          document.querySelectorAll("#wordlist li").forEach(li => { if (li.textContent === atual) li.classList.add("found"); });
+          selecionadas.length = 0; atual = ""; document.querySelector("#currentWord strong").textContent = "";
+        }
+      });
+      container.appendChild(cell);
+    });
+
+    /* ⛓ Forca Católica */
+    const palavrasCat = ["JESUS", "MARIA", "ROSARIO", "FE", "MISSA", "BIBLIA"];
+    let palavraC = palavrasCat[Math.floor(Math.random() * palavrasCat.length)];
+    let certoC = [], errosC = 0;
+    const maxErros = 6;
+    const wordC = document.getElementById("catolicaWord");
+    const letrasC = document.getElementById("catolicaLetters");
+    const msgC = document.getElementById("catolicaMsg");
+
+    function atualizarC() { wordC.textContent = palavraC.split("").map(l => certoC.includes(l) ? l : "_").join(" "); }
+    function tecladoC() {
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(l => {
+        const b = document.createElement("button");
+        b.textContent = l;
+        b.onclick = () => {
+          b.disabled = true;
+          if (palavraC.includes(l)) certoC.push(l);
+          else errosC++;
+          document.getElementById("hangman").textContent = `Erros: ${errosC} de 6`;
+          atualizarC();
+          if (palavraC.split("").every(l => certoC.includes(l))) msgC.textContent = "🎉 Acertou!";
+          else if (errosC >= maxErros) msgC.textContent = `😢 Perdeste! Era ${palavraC}`;
+        };
+        letrasC.appendChild(b);
+      });
+    }
+    atualizarC(); tecladoC();
+
+    /* ⛓ Forca Bíblica */
+    const palavrasBib = ["APOCALIPSE", "GENESIS", "DISCIPULO", "PROFETA"];
+    let palavraB = palavrasBib[Math.floor(Math.random() * palavrasBib.length)];
+    let certoB = [], tentativas = 6;
+    const wordB = document.getElementById("biblicaWord");
+    const letrasB = document.getElementById("biblicaLetters");
+    const msgB = document.getElementById("biblicaMsg");
+
+    function atualizarB() { wordB.textContent = palavraB.split("").map(l => certoB.includes(l) ? l : "_").join(" "); }
+    function tecladoB() {
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(l => {
+        const b = document.createElement("button");
+        b.textContent = l;
+        b.onclick = () => {
+          b.disabled = true;
+          if (palavraB.includes(l)) certoB.push(l);
+          else tentativas--;
+          atualizarB();
+          if (palavraB.split("").every(l => certoB.includes(l))) msgB.textContent = "🎉 Acertou!";
+          else if (tentativas === 0) msgB.textContent = `😢 Perdeste! Era ${palavraB}`;
+        };
+        letrasB.appendChild(b);
+      });
+    }
+    atualizarB(); tecladoB();
+  </script>
 </body>
 </html>
