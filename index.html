@@ -45,33 +45,6 @@
       font-style: italic;
     }
 
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      margin: 24px auto;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px #ccc;
-    }
-
-    .curiosidade {
-      background: #fffde7;
-      border-left: 5px solid #ffd54f;
-      border-radius: 8px;
-      color: #7b1fa2;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 16px;
-    }
-
-    .curiosidade img {
-      height: 8rem;
-      width: 8rem;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-
     footer {
       background: #ddd;
       text-align: center;
@@ -102,10 +75,6 @@
       cursor: pointer;
       user-select: none;
       transition: transform 0.2s;
-    }
-
-    .card:active {
-      transform: scale(0.95);
     }
 
     .card.flipped {
@@ -203,124 +172,121 @@
       font-size: 1.2em;
     }
 
-    @media (min-width: 768px) {
-      .letters button {
-        flex: 1 1 calc(10% - 6px);
-      }
-
-      .card {
-        font-size: 1.4em;
-      }
-
-      .cell {
-        font-size: 1.1em;
-      }
-    }
+    /* 📌 Complete o Versículo */
     .dropzone {
-    display: inline-block;
-    min-width: 60px;
-    padding: 4px;
-    border-bottom: 2px dashed #7b1fa2;
-  }
-  .opcao {
-    display: inline-block;
-    margin: 6px;
-    padding: 8px 12px;
-    background: #7b1fa2;
-    color: white;
-    border-radius: 6px;
-    cursor: grab;
-  }
-      #numerosGrid {
-    display: grid;
-    grid-template-columns: repeat(8, 40px);
-    gap: 5px;
-    justify-content: center;
-  }
-  .numCell {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f1c40f;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  .numCell.found {
-    background: #2ecc71;
-    color: white;
-  }
+      display: inline-block;
+      min-width: 60px;
+      padding: 4px;
+      border-bottom: 2px dashed #7b1fa2;
+    }
+
+    .opcao {
+      display: inline-block;
+      margin: 6px;
+      padding: 8px 12px;
+      background: #7b1fa2;
+      color: white;
+      border-radius: 6px;
+      cursor: grab;
+    }
+
+    /* 🔢 Caça-Número */
+    #numerosGrid {
+      display: grid;
+      grid-template-columns: repeat(8, 40px);
+      gap: 5px;
+      justify-content: center;
+    }
+
+    .numCell {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f1c40f;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .numCell.found {
+      background: #2ecc71;
+      color: white;
+    }
+
+    /* 📜 Ordem da Criação */
+    .etapa {
+      display: inline-block;
+      margin: 6px;
+      padding: 10px 16px;
+      background: #3498db;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .etapa.certo {
+      background: #2ecc71;
+    }
+
+    .etapa.errado {
+      background: #e74c3c;
+    }
   </style>
 </head>
 
 <body>
   <header>
     <h1><span style="color:#ff9800;">A Mulher</span> e o Dragão</h1>
+    <p>Apocalipse 12</p>
   </header>
 
   <section>
-    <h2>Resumo da Visão</h2>
-    <p>Em Apocalipse 12, João descreve uma visão poderosa: uma mulher grávida...</p>
-
-    <h2>Texto Bíblico (Apocalipse 12:1-6)</h2>
+    <h2>Texto Bíblico</h2>
     <blockquote>
-      Apareceu no céu um grande sinal: uma mulher vestida do sol...
+      "Apareceu no céu um grande sinal: uma mulher vestida do sol, com a lua debaixo dos pés, e uma coroa de doze estrelas na cabeça." (Apocalipse 12:1)
     </blockquote>
 
-    <h2>Interpretação Simbólica</h2>
-    <ul>
-      <li><strong>Mulher:</strong> O povo de Deus</li>
-      <li><strong>Dragão:</strong> Satanás</li>
-      <li><strong>Filho homem:</strong> Jesus Cristo</li>
+    <h2>🎴 Jogo da Memória</h2>
+    <div id="memoryGame" class="game-container"></div>
+
+    <h2>🔤 Caça-Palavras</h2>
+    <div id="wordsearch" class="grid"></div>
+    <p id="currentWord"></p>
+    <ul class="word-list">
+      <li>Mulher</li>
+      <li>Dragão</li>
+      <li>Céu</li>
+      <li>Estrelas</li>
+      <li>Vitória</li>
     </ul>
 
-    <h2>Jogo da Memória</h2>
-    <div class="game-container" id="memory"></div>
-    <p id="memoryMsg" style="text-align:center; font-weight:bold;"></p>
-
-    <h2>Caça-palavras Católico</h2>
-    <div class="grid" id="wordsearch"></div>
-    <div id="currentWord">Palavra atual: <strong></strong></div>
-    <ul id="wordlist">
-      <li>JESUS</li>
-      <li>MARIA</li>
-      <li>ROSARIO</li>
-      <li>FE</li>
-      <li>ORACAO</li>
-      <li>EVANGELHO</li>
-    </ul>
-
-    <h2>Jogo da Forca Católico</h2>
+    <h2>⛓ Jogo da Forca</h2>
     <div class="forca">
-      <div class="word" id="catolicaWord"></div>
-      <div class="letters" id="catolicaLetters"></div>
-      <div id="hangman">Erros: 0 de 6</div>
-      <div class="msg" id="catolicaMsg"></div>
+      <p id="hangman"></p>
+      <p id="word"></p>
+      <div id="letters" class="letters"></div>
+      <p class="msg" id="msg"></p>
     </div>
 
-    <h2>Jogo da Forca Bíblico</h2>
-    <div class="forca">
-      <div class="word" id="biblicaWord"></div>
-      <div class="letters" id="biblicaLetters"></div>
-      <div class="msg" id="biblicaMsg"></div>
+    <h2>📌 Complete o Versículo</h2>
+    <p>
+      "E houve guerra no <span class="dropzone" data-palavra="céu"></span>: Miguel e os seus anjos
+      batalhavam contra o <span class="dropzone" data-palavra="dragão"></span>." (Apocalipse 12:7)
+    </p>
+    <div>
+      <span class="opcao" draggable="true">céu</span>
+      <span class="opcao" draggable="true">dragão</span>
+      <span class="opcao" draggable="true">mulher</span>
     </div>
-    
-<h2>Quiz Bíblico</h2>
-<div id="quiz"></div>
-<p id="quizResult" style="font-weight:bold; text-align:center;"></p>
 
-<h2>Complete o Versículo</h2>
-<p id="versiculo">"Eu sou o caminho, a verdade e a <span class="dropzone"></span>."</p>
-<div id="opcoes"></div>
-<p id="dragMsg" style="font-weight:bold; text-align:center;"></p>
-<h2>Caça-Número</h2>
-<div id="numerosGrid"></div>
-<p id="numerosMsg"></p>
-    <h2>Complete a Palavra</h2>
-<p id="multiPergunta"></p>
-<div id="multiOpcoes"></div>
-<p id="multiMsg"></p>
+    <h2>🔢 Caça-Número</h2>
+    <div id="numerosGrid"></div>
+    <p id="numMsg" style="text-align:center; font-weight:bold;"></p>
+
+    <h2>📜 Ordem da Criação</h2>
+    <div id="ordemGame"></div>
+    <p id="ordemMsg" style="font-weight:bold; text-align:center;"></p>
   </section>
 
   <footer>
@@ -332,293 +298,135 @@
   </audio>
 
   <script>
-    /* 🎴 Jogo da Memória */
-    const valores = ['Fé', 'Graça', 'Dragão', 'Mulher', 'Cristo', 'Deserto', 'Estrela', 'Anjo'];
-    let pares = [...valores, ...valores];
-    pares.sort(() => Math.random() - 0.5);
-
-    let primeira = null, segunda = null, bloqueado = false, acertos = 0;
-    const board = document.getElementById("memory");
-
-    pares.forEach(valor => {
-      const carta = document.createElement("div");
-      carta.className = "card";
-      carta.dataset.valor = valor;
-      carta.addEventListener("click", virar);
-      board.appendChild(carta);
-    });
-
-    function virar() {
-      if (bloqueado || this.classList.contains("flipped")) return;
-      this.textContent = this.dataset.valor;
-      this.classList.add("flipped");
-      if (!primeira) {
-        primeira = this;
-        return;
-      }
-      segunda = this;
-      verificar();
-    }
-
-    function verificar() {
-      if (primeira.dataset.valor === segunda.dataset.valor) {
-        primeira.classList.add("matched");
-        segunda.classList.add("matched");
-        acertos++;
-        if (acertos === valores.length) {
-          document.getElementById("memoryMsg").textContent = "🎉 Parabéns, terminou!";
-        }
-        resetar();
-      } else {
-        bloqueado = true;
-        setTimeout(() => {
-          primeira.textContent = "";
-          segunda.textContent = "";
-          primeira.classList.remove("flipped");
-          segunda.classList.remove("flipped");
-          resetar();
-        }, 800);
-      }
-    }
-
-    function resetar() {
-      [primeira, segunda, bloqueado] = [null, null, false];
-    }
-
-    /* 🔤 Caça-palavras */
-    const palavras = ["JESUS", "MARIA", "ROSARIO", "FE", "ORACAO", "EVANGELHO"];
-    const gridSize = 10;
-    const grid = Array(gridSize * gridSize).fill('');
-    const selecionadas = [];
-    let atual = "";
-
-    function colocar(palavra) {
-      let ok = false;
-      while (!ok) {
-        const dir = Math.random() < 0.5 ? 1 : gridSize;
-        const inicio = Math.floor(Math.random() * grid.length);
-        let cabe = true;
-        for (let i = 0; i < palavra.length; i++) {
-          const idx = inicio + i * dir;
-          if (idx >= grid.length || (dir === 1 && Math.floor(idx / gridSize) !== Math.floor(inicio / gridSize))) {
-            cabe = false; break;
+    // 🎴 Jogo da Memória
+    (function () {
+      const items = ["☀️", "🌙", "⭐", "🐉", "👑", "👩"];
+      const game = [...items, ...items].sort(() => Math.random() - 0.5);
+      const container = document.getElementById("memoryGame");
+      let flipped = [];
+      game.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.dataset.value = item;
+        card.textContent = "?";
+        card.onclick = () => {
+          if (card.classList.contains("flipped") || flipped.length === 2) return;
+          card.textContent = item;
+          card.classList.add("flipped");
+          flipped.push(card);
+          if (flipped.length === 2) {
+            if (flipped[0].dataset.value === flipped[1].dataset.value) {
+              flipped.forEach(c => c.classList.add("matched"));
+            } else {
+              setTimeout(() => flipped.forEach(c => {
+                c.classList.remove("flipped");
+                c.textContent = "?";
+              }), 800);
+            }
+            flipped = [];
           }
-          if (grid[idx] && grid[idx] !== palavra[i]) { cabe = false; break; }
-        }
-        if (cabe) {
-          for (let i = 0; i < palavra.length; i++) grid[inicio + i * dir] = palavra[i];
-          ok = true;
-        }
+        };
+        container.appendChild(card);
+      });
+    })();
+
+    // 🔤 Caça-palavras (simplificado)
+    (function () {
+      const palavras = ["MULHER", "DRAGÃO", "CÉU", "ESTRELAS", "VITÓRIA"];
+      const grid = document.getElementById("wordsearch");
+      const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      for (let i = 0; i < 100; i++) {
+        const div = document.createElement("div");
+        div.className = "cell";
+        div.textContent = letras[Math.floor(Math.random() * letras.length)];
+        grid.appendChild(div);
       }
-    }
-    palavras.forEach(colocar);
-    for (let i = 0; i < grid.length; i++) if (!grid[i]) grid[i] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-    const container = document.getElementById("wordsearch");
-    grid.forEach((letra, idx) => {
-      const cell = document.createElement("div");
-      cell.className = "cell";
-      cell.textContent = letra;
-      cell.addEventListener("click", () => {
-        cell.classList.add("selected");
-        selecionadas.push(cell);
-        atual += letra;
-        document.querySelector("#currentWord strong").textContent = atual;
-        if (palavras.includes(atual)) {
-          selecionadas.forEach(c => c.classList.add("found"));
-          document.querySelectorAll("#wordlist li").forEach(li => { if (li.textContent === atual) li.classList.add("found"); });
-          selecionadas.length = 0; atual = ""; document.querySelector("#currentWord strong").textContent = "";
-        }
+    })();
+
+    // ⛓ Jogo da Forca
+    (function () {
+      const palavras = ["MULHER", "DRAGAO", "CEU", "ESTRELAS"];
+      const palavra = palavras[Math.floor(Math.random() * palavras.length)];
+      let erros = 0, acertos = 0;
+      const wordEl = document.getElementById("word");
+      const msgEl = document.getElementById("msg");
+      const lettersEl = document.getElementById("letters");
+      wordEl.textContent = "_ ".repeat(palavra.length);
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(l => {
+        const btn = document.createElement("button");
+        btn.textContent = l;
+        btn.onclick = () => {
+          btn.disabled = true;
+          if (palavra.includes(l)) {
+            let novo = "";
+            for (let i = 0; i < palavra.length; i++) {
+              novo += palavra[i] === l ? l + " " : wordEl.textContent[2 * i] + " ";
+            }
+            wordEl.textContent = novo;
+            acertos++;
+            if (!novo.includes("_")) msgEl.textContent = "🎉 Você venceu!";
+          } else {
+            erros++;
+            if (erros > 5) msgEl.textContent = "☠️ Game Over!";
+          }
+        };
+        lettersEl.appendChild(btn);
       });
-      container.appendChild(cell);
+    })();
+
+    // 📌 Complete o Versículo
+    document.querySelectorAll(".opcao").forEach(o => {
+      o.ondragstart = e => e.dataTransfer.setData("text", o.textContent);
     });
-
-    /* ⛓ Forca Católica */
-    const palavrasCat = ["JESUS", "MARIA", "ROSARIO", "FE", "MISSA", "BIBLIA"];
-    let palavraC = palavrasCat[Math.floor(Math.random() * palavrasCat.length)];
-    let certoC = [], errosC = 0;
-    const maxErros = 6;
-    const wordC = document.getElementById("catolicaWord");
-    const letrasC = document.getElementById("catolicaLetters");
-    const msgC = document.getElementById("catolicaMsg");
-
-    function atualizarC() { wordC.textContent = palavraC.split("").map(l => certoC.includes(l) ? l : "_").join(" "); }
-    function tecladoC() {
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(l => {
-        const b = document.createElement("button");
-        b.textContent = l;
-        b.onclick = () => {
-          b.disabled = true;
-          if (palavraC.includes(l)) certoC.push(l);
-          else errosC++;
-          document.getElementById("hangman").textContent = `Erros: ${errosC} de 6`;
-          atualizarC();
-          if (palavraC.split("").every(l => certoC.includes(l))) msgC.textContent = "🎉 Acertou!";
-          else if (errosC >= maxErros) msgC.textContent = `😢 Perdeste! Era ${palavraC}`;
-        };
-        letrasC.appendChild(b);
-      });
-    }
-    atualizarC(); tecladoC();
-
-    /* ⛓ Forca Bíblica */
-    const palavrasBib = ["APOCALIPSE", "GENESIS", "DISCIPULO", "PROFETA"];
-    let palavraB = palavrasBib[Math.floor(Math.random() * palavrasBib.length)];
-    let certoB = [], tentativas = 6;
-    const wordB = document.getElementById("biblicaWord");
-    const letrasB = document.getElementById("biblicaLetters");
-    const msgB = document.getElementById("biblicaMsg");
-
-    function atualizarB() { wordB.textContent = palavraB.split("").map(l => certoB.includes(l) ? l : "_").join(" "); }
-    function tecladoB() {
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(l => {
-        const b = document.createElement("button");
-        b.textContent = l;
-        b.onclick = () => {
-          b.disabled = true;
-          if (palavraB.includes(l)) certoB.push(l);
-          else tentativas--;
-          atualizarB();
-          if (palavraB.split("").every(l => certoB.includes(l))) msgB.textContent = "🎉 Acertou!";
-          else if (tentativas === 0) msgB.textContent = `😢 Perdeste! Era ${palavraB}`;
-        };
-        letrasB.appendChild(b);
-      });
-    }
-    atualizarB(); tecladoB();
-    
-
-  const quizPerguntas = [
-    {
-      pergunta: "Quem foi engolido por um grande peixe?",
-      opcoes: ["Jonas", "Moisés", "Davi"],
-      resposta: "Jonas"
-    },
-    {
-      pergunta: "Onde nasceu Jesus?",
-      opcoes: ["Jerusalém", "Belém", "Nazaré"],
-      resposta: "Belém"
-    },
-    {
-      pergunta: "Quem recebeu os 10 Mandamentos?",
-      opcoes: ["Abraão", "Moisés", "Josué"],
-      resposta: "Moisés"
-    }
-  ];
-
-  let quizIndex = 0, acertosQuiz = 0;
-  const quizDiv = document.getElementById("quiz");
-
-  function mostrarQuiz() {
-    if (quizIndex >= quizPerguntas.length) {
-      document.getElementById("quizResult").textContent = `🎉 Você acertou ${acertosQuiz}/${quizPerguntas.length}!`;
-      quizDiv.innerHTML = "";
-      return;
-    }
-
-    const q = quizPerguntas[quizIndex];
-    quizDiv.innerHTML = `<h3>${q.pergunta}</h3>`;
-    q.opcoes.forEach(op => {
-      const b = document.createElement("button");
-      b.textContent = op;
-      b.style.display = "block";
-      b.style.margin = "6px auto";
-      b.style.padding = "10px";
-      b.style.width = "80%";
-      b.style.borderRadius = "8px";
-      b.style.border = "none";
-      b.style.background = "#7b1fa2";
-      b.style.color = "white";
-      b.onclick = () => {
-        if (op === q.resposta) acertosQuiz++;
-        quizIndex++;
-        mostrarQuiz();
+    document.querySelectorAll(".dropzone").forEach(d => {
+      d.ondragover = e => e.preventDefault();
+      d.ondrop = e => {
+        const palavra = e.dataTransfer.getData("text");
+        if (palavra === d.dataset.palavra) {
+          d.textContent = palavra;
+          d.style.color = "green";
+        } else {
+          d.style.color = "red";
+        }
       };
-      quizDiv.appendChild(b);
     });
-  }
 
-  mostrarQuiz();
-
-const sequenciaCorreta = ["Luz", "Animais", "Homem"];
-  const embaralhado = [...sequenciaCorreta].sort(() => Math.random() - 0.5);
-
-  const ordemDiv = document.getElementById("ordemGame");
-  let indice = 0;
-
-  embaralhado.forEach(txt => {
-    const span = document.createElement("span");
-    span.textContent = txt;
-    span.className = "etapa";
-    span.onclick = () => {
-      if (txt === sequenciaCorreta[indice]) {
-        span.classList.add("certo");
-        indice++;
-        if (indice === sequenciaCorreta.length) {
-          document.getElementById("ordemMsg").textContent = "🎉 Você acertou toda a ordem!";
-        }
-      } else {
-        span.classList.add("errado");
-        document.getElementById("ordemMsg").textContent = "❌ Ordem errada! Tente novamente.";
+    // 🔢 Caça-Número
+    (function () {
+      const grid = document.getElementById("numerosGrid");
+      for (let i = 1; i <= 40; i++) {
+        const cell = document.createElement("div");
+        cell.className = "numCell";
+        cell.textContent = i;
+        cell.onclick = () => {
+          if (i % 7 === 0) {
+            cell.classList.add("found");
+            document.getElementById("numMsg").textContent = "✅ Você encontrou os múltiplos de 7!";
+          }
+        };
+        grid.appendChild(cell);
       }
-    };
-    ordemDiv.appendChild(span);
-  });
-    const numerosAlvo = [3, 7, 12, 40];
-  let encontrados = [];
+    })();
 
-  const gridNum = document.getElementById("numerosGrid");
-  for (let i = 0; i < 64; i++) {
-    const n = Math.floor(Math.random() * 50);
-    const cell = document.createElement("div");
-    cell.textContent = n;
-    cell.className = "numCell";
-    cell.onclick = () => {
-      if (numerosAlvo.includes(n) && !encontrados.includes(n)) {
-        cell.classList.add("found");
-        encontrados.push(n);
-        if (encontrados.length === numerosAlvo.length) {
-          document.getElementById("numerosMsg").textContent = "🎉 Você achou todos os números bíblicos!";
-        }
-      }
-    };
-    gridNum.appendChild(cell);
-  }
-     const questoes = [
-    { q: "No princípio Deus criou o ___ e a terra.", op: ["mar", "céu", "homem"], ans: "céu" },
-    { q: "Jesus multiplicou ___ pães e 2 peixes.", op: ["7", "5", "3"], ans: "5" },
-    { q: "Paulo caiu do ___ a caminho de Damasco.", op: ["cavalo", "jumento", "carro"], ans: "cavalo" }
-  ];
-  let atualQ = 0;
-
-  function mostrarQuestao() {
-    const q = questoes[atualQ];
-    document.getElementById("multiPergunta").textContent = q.q;
-    const opDiv = document.getElementById("multiOpcoes");
-    opDiv.innerHTML = "";
-    q.op.forEach(opt => {
-      const btn = document.createElement("button");
-      btn.textContent = opt;
-      btn.onclick = () => verificarResp(opt);
-      opDiv.appendChild(btn);
-    });
-  }
-
-  function verificarResp(resp) {
-    const q = questoes[atualQ];
-    const msg = document.getElementById("multiMsg");
-    msg.textContent = resp === q.ans ? "🎉 Correto!" : "❌ Errado!";
-    atualQ = (atualQ + 1) % questoes.length;
-    setTimeout(() => {
-      msg.textContent = "";
-      mostrarQuestao();
-    }, 1200);
-  }
-
-  mostrarQuestao();
+    // 📜 Ordem da Criação
+    (function () {
+      const etapas = ["Luz", "Céu", "Terra", "Animais", "Homem"];
+      const ordemDiv = document.getElementById("ordemGame");
+      etapas.sort(() => Math.random() - 0.5).forEach(e => {
+        const div = document.createElement("div");
+        div.className = "etapa";
+        div.textContent = e;
+        div.onclick = () => {
+          if (div.textContent === etapas[ordemDiv.children.length - 1]) {
+            div.classList.add("certo");
+          } else {
+            div.classList.add("errado");
+          }
+        };
+        ordemDiv.appendChild(div);
+      });
+    })();
   </script>
 </body>
+
 </html>
-
-
-
-
