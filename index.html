@@ -317,7 +317,10 @@
 <h2>Caça-Número</h2>
 <div id="numerosGrid"></div>
 <p id="numerosMsg"></p>
-    
+    <h2>Complete a Palavra</h2>
+<p id="multiPergunta"></p>
+<div id="multiOpcoes"></div>
+<p id="multiMsg"></p>
   </section>
 
   <footer>
@@ -580,9 +583,42 @@ const sequenciaCorreta = ["Luz", "Animais", "Homem"];
     };
     gridNum.appendChild(cell);
   }
+     const questoes = [
+    { q: "No princípio Deus criou o ___ e a terra.", op: ["mar", "céu", "homem"], ans: "céu" },
+    { q: "Jesus multiplicou ___ pães e 2 peixes.", op: ["7", "5", "3"], ans: "5" },
+    { q: "Paulo caiu do ___ a caminho de Damasco.", op: ["cavalo", "jumento", "carro"], ans: "cavalo" }
+  ];
+  let atualQ = 0;
+
+  function mostrarQuestao() {
+    const q = questoes[atualQ];
+    document.getElementById("multiPergunta").textContent = q.q;
+    const opDiv = document.getElementById("multiOpcoes");
+    opDiv.innerHTML = "";
+    q.op.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.textContent = opt;
+      btn.onclick = () => verificarResp(opt);
+      opDiv.appendChild(btn);
+    });
+  }
+
+  function verificarResp(resp) {
+    const q = questoes[atualQ];
+    const msg = document.getElementById("multiMsg");
+    msg.textContent = resp === q.ans ? "🎉 Correto!" : "❌ Errado!";
+    atualQ = (atualQ + 1) % questoes.length;
+    setTimeout(() => {
+      msg.textContent = "";
+      mostrarQuestao();
+    }, 1200);
+  }
+
+  mostrarQuestao();
   </script>
 </body>
 </html>
+
 
 
 
