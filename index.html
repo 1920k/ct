@@ -195,12 +195,7 @@ h1 {
     }
 }
     
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fdf6ec;
-      text-align: center;
-      padding: 20px;
-    }
+
     h1 {
       color: #2c3e50;
     }
@@ -240,7 +235,34 @@ h1 {
       font-size: 18px;
       color: #2d3436;
     }
-  
+   h1 {
+      color: #2c3e50;
+    }
+    #word {
+      font-size: 32px;
+      letter-spacing: 10px;
+      margin: 20px 0;
+    }
+    #letters button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    #letters button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    #message {
+      font-size: 24px;
+      margin-top: 20px;
+      color: #d63031;
+    }
+    #hangman {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
 </style>
 
 <body>
@@ -321,6 +343,13 @@ h1 {
       <li>EVANGELHO</li>
     </ul>
   </div>
+
+          <h1>Jogo da Forca Católico</h1>
+  <div id="word">_ _ _ _ _</div>
+  <div id="letters"></div>
+  <div id="hangman">Erros: 0 de 6</div>
+  <div id="message"></div>
+
 
 
     </section>
@@ -512,6 +541,59 @@ h1 {
     `;
             curiosidade.style.display = 'flex';
         });
+        
+    const palavras = ["JESUS", "MARIA", "ROSARIO", "FE", "ORACAO", "EVANGELHO", "MISSA", "SANTO", "BIBLIA"];
+    const palavra = palavras[Math.floor(Math.random() * palavras.length)];
+    let acertos = [];
+    let erros = 0;
+    const maxErros = 6;
+
+    const wordDiv = document.getElementById("word");
+    const lettersDiv = document.getElementById("letters");
+    const messageDiv = document.getElementById("message");
+    const hangmanDiv = document.getElementById("hangman");
+
+    function atualizarPalavra() {
+      wordDiv.innerHTML = palavra.split('').map(letra => acertos.includes(letra) ? letra : "_").join(' ');
+    }
+
+    function verificarFim() {
+      if (palavra.split('').every(letra => acertos.includes(letra))) {
+        messageDiv.textContent = "Parabéns! Você acertou!";
+        desativarTeclas();
+      } else if (erros >= maxErros) {
+        messageDiv.textContent = `Você perdeu! A palavra era: ${palavra}`;
+        desativarTeclas();
+      }
+    }
+
+    function desativarTeclas() {
+      document.querySelectorAll("#letters button").forEach(btn => btn.disabled = true);
+    }
+
+    function criarTeclado() {
+      const alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      alfabeto.split('').forEach(letra => {
+        const btn = document.createElement("button");
+        btn.textContent = letra;
+        btn.addEventListener("click", () => {
+          btn.disabled = true;
+          if (palavra.includes(letra)) {
+            acertos.push(letra);
+          } else {
+            erros++;
+            hangmanDiv.textContent = `Erros: ${erros} de ${maxErros}`;
+          }
+          atualizarPalavra();
+          verificarFim();
+        });
+        lettersDiv.appendChild(btn);
+      });
+    }
+
+    atualizarPalavra();
+    criarTeclado();
+  
     </script>
 <audio autoplay loop>
   <source src="./1.mp3" type="audio/mpeg">
@@ -519,6 +601,7 @@ h1 {
 </audio>
 </body>
 </html>
+
 
 
 
