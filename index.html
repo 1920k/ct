@@ -262,6 +262,24 @@ h1 {
       margin-top: 20px;
       font-size: 18px;
     }
+    h1 {
+      color: #2e8b57;
+    }
+    #wordDisplay {
+      font-size: 2em;
+      letter-spacing: 10px;
+      margin: 20px;
+    }
+    #letters button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 1em;
+    }
+    #message {
+      font-size: 1.5em;
+      margin-top: 20px;
+      color: #b22222;
+    }
 
 </style>
 
@@ -348,6 +366,11 @@ h1 {
   <div id="word">_ _ _ _ _</div>
   <div id="letters"></div>
   <div id="hangman">Erros: 0 de 6</div>
+  <div id="message"></div>
+
+  <h1>Jogo da Forca Bíblico</h1>
+  <div id="wordDisplay"></div>
+  <div id="letters"></div>
   <div id="message"></div>
 
 
@@ -594,6 +617,50 @@ h1 {
     atualizarPalavra();
     criarTeclado();
   
+    const palavrasBiblicas = ["APOCALIPSE", "DISCIPULO", "SALVADOR", "GENESIS", "PENTATEUCO", "MILAGRE", "PROFETA"];
+    let palavra = palavrasBiblicas[Math.floor(Math.random() * palavrasBiblicas.length)];
+    let letrasCorretas = [];
+    let tentativas = 6;
+
+    const wordDisplay = document.getElementById("wordDisplay");
+    const lettersDiv = document.getElementById("letters");
+    const messageDiv = document.getElementById("message");
+
+    function mostrarPalavra() {
+      wordDisplay.innerHTML = palavra.split("").map(letra => 
+        letrasCorretas.includes(letra) ? letra : "_"
+      ).join(" ");
+    }
+
+    function criarBotoes() {
+      for (let i = 65; i <= 90; i++) {
+        const letra = String.fromCharCode(i);
+        const btn = document.createElement("button");
+        btn.textContent = letra;
+        btn.onclick = () => verificarLetra(letra, btn);
+        lettersDiv.appendChild(btn);
+      }
+    }
+
+    function verificarLetra(letra, btn) {
+      btn.disabled = true;
+      if (palavra.includes(letra)) {
+        letrasCorretas.push(letra);
+        mostrarPalavra();
+        if (!wordDisplay.innerHTML.includes("_")) {
+          messageDiv.textContent = "Parabéns! Você acertou a palavra!";
+        }
+      } else {
+        tentativas--;
+        if (tentativas === 0) {
+          messageDiv.textContent = `Você perdeu! A palavra era: ${palavra}`;
+        }
+      }
+    }
+
+    mostrarPalavra();
+    criarBotoes();
+
     </script>
 <audio autoplay loop>
   <source src="./1.mp3" type="audio/mpeg">
@@ -601,6 +668,7 @@ h1 {
 </audio>
 </body>
 </html>
+
 
 
 
