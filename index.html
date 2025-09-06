@@ -216,6 +216,7 @@
         font-size: 1.1em;
       }
     }
+    
   </style>
 </head>
 
@@ -270,6 +271,12 @@
       <div class="letters" id="biblicaLetters"></div>
       <div class="msg" id="biblicaMsg"></div>
     </div>
+    
+<h2>Quiz Bíblico</h2>
+<div id="quiz"></div>
+<p id="quizResult" style="font-weight:bold; text-align:center;"></p>
+
+
   </section>
 
   <footer>
@@ -434,6 +441,62 @@
       });
     }
     atualizarB(); tecladoB();
+    
+
+  const quizPerguntas = [
+    {
+      pergunta: "Quem foi engolido por um grande peixe?",
+      opcoes: ["Jonas", "Moisés", "Davi"],
+      resposta: "Jonas"
+    },
+    {
+      pergunta: "Onde nasceu Jesus?",
+      opcoes: ["Jerusalém", "Belém", "Nazaré"],
+      resposta: "Belém"
+    },
+    {
+      pergunta: "Quem recebeu os 10 Mandamentos?",
+      opcoes: ["Abraão", "Moisés", "Josué"],
+      resposta: "Moisés"
+    }
+  ];
+
+  let quizIndex = 0, acertosQuiz = 0;
+  const quizDiv = document.getElementById("quiz");
+
+  function mostrarQuiz() {
+    if (quizIndex >= quizPerguntas.length) {
+      document.getElementById("quizResult").textContent = `🎉 Você acertou ${acertosQuiz}/${quizPerguntas.length}!`;
+      quizDiv.innerHTML = "";
+      return;
+    }
+
+    const q = quizPerguntas[quizIndex];
+    quizDiv.innerHTML = `<h3>${q.pergunta}</h3>`;
+    q.opcoes.forEach(op => {
+      const b = document.createElement("button");
+      b.textContent = op;
+      b.style.display = "block";
+      b.style.margin = "6px auto";
+      b.style.padding = "10px";
+      b.style.width = "80%";
+      b.style.borderRadius = "8px";
+      b.style.border = "none";
+      b.style.background = "#7b1fa2";
+      b.style.color = "white";
+      b.onclick = () => {
+        if (op === q.resposta) acertosQuiz++;
+        quizIndex++;
+        mostrarQuiz();
+      };
+      quizDiv.appendChild(b);
+    });
+  }
+
+  mostrarQuiz();
+
+
   </script>
 </body>
 </html>
+
