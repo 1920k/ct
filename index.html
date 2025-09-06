@@ -216,7 +216,21 @@
         font-size: 1.1em;
       }
     }
-    
+    .dropzone {
+    display: inline-block;
+    min-width: 60px;
+    padding: 4px;
+    border-bottom: 2px dashed #7b1fa2;
+  }
+  .opcao {
+    display: inline-block;
+    margin: 6px;
+    padding: 8px 12px;
+    background: #7b1fa2;
+    color: white;
+    border-radius: 6px;
+    cursor: grab;
+  }
   </style>
 </head>
 
@@ -276,6 +290,10 @@
 <div id="quiz"></div>
 <p id="quizResult" style="font-weight:bold; text-align:center;"></p>
 
+<h2>Complete o Versículo</h2>
+<p id="versiculo">"Eu sou o caminho, a verdade e a <span class="dropzone"></span>."</p>
+<div id="opcoes"></div>
+<p id="dragMsg" style="font-weight:bold; text-align:center;"></p>
 
   </section>
 
@@ -495,8 +513,32 @@
 
   mostrarQuiz();
 
+const sequenciaCorreta = ["Luz", "Animais", "Homem"];
+  const embaralhado = [...sequenciaCorreta].sort(() => Math.random() - 0.5);
 
+  const ordemDiv = document.getElementById("ordemGame");
+  let indice = 0;
+
+  embaralhado.forEach(txt => {
+    const span = document.createElement("span");
+    span.textContent = txt;
+    span.className = "etapa";
+    span.onclick = () => {
+      if (txt === sequenciaCorreta[indice]) {
+        span.classList.add("certo");
+        indice++;
+        if (indice === sequenciaCorreta.length) {
+          document.getElementById("ordemMsg").textContent = "🎉 Você acertou toda a ordem!";
+        }
+      } else {
+        span.classList.add("errado");
+        document.getElementById("ordemMsg").textContent = "❌ Ordem errada! Tente novamente.";
+      }
+    };
+    ordemDiv.appendChild(span);
+  });
   </script>
 </body>
 </html>
+
 
