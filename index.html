@@ -231,6 +231,26 @@
     border-radius: 6px;
     cursor: grab;
   }
+      #numerosGrid {
+    display: grid;
+    grid-template-columns: repeat(8, 40px);
+    gap: 5px;
+    justify-content: center;
+  }
+  .numCell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1c40f;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .numCell.found {
+    background: #2ecc71;
+    color: white;
+  }
   </style>
 </head>
 
@@ -294,7 +314,10 @@
 <p id="versiculo">"Eu sou o caminho, a verdade e a <span class="dropzone"></span>."</p>
 <div id="opcoes"></div>
 <p id="dragMsg" style="font-weight:bold; text-align:center;"></p>
-
+<h2>Caça-Número</h2>
+<div id="numerosGrid"></div>
+<p id="numerosMsg"></p>
+    
   </section>
 
   <footer>
@@ -537,8 +560,29 @@ const sequenciaCorreta = ["Luz", "Animais", "Homem"];
     };
     ordemDiv.appendChild(span);
   });
+    const numerosAlvo = [3, 7, 12, 40];
+  let encontrados = [];
+
+  const gridNum = document.getElementById("numerosGrid");
+  for (let i = 0; i < 64; i++) {
+    const n = Math.floor(Math.random() * 50);
+    const cell = document.createElement("div");
+    cell.textContent = n;
+    cell.className = "numCell";
+    cell.onclick = () => {
+      if (numerosAlvo.includes(n) && !encontrados.includes(n)) {
+        cell.classList.add("found");
+        encontrados.push(n);
+        if (encontrados.length === numerosAlvo.length) {
+          document.getElementById("numerosMsg").textContent = "🎉 Você achou todos os números bíblicos!";
+        }
+      }
+    };
+    gridNum.appendChild(cell);
+  }
   </script>
 </body>
 </html>
+
 
 
