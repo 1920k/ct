@@ -2,431 +2,840 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>A Mulher e o Dragão - Apocalipse 12</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      background: linear-gradient(135deg, #f3e7fe 0%, #e3f0ff 100%);
-      color: #333;
-      line-height: 1.6;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Mulher e o Dragão — Jogos Bíblicos</title>
 
-    header {
-      background: linear-gradient(90deg, #7b1fa2 60%, #512da8 100%);
-      color: white;
-      padding: 24px;
-      text-align: center;
-      box-shadow: 0 2px 8px #ccc;
-    }
+    <style>
+        :root {
+            --roxo: #7b1fa2;
+            --roxo-esc: #512da8;
+            --amarelo: #ffd54f;
+            --acinza: #95a5a6;
+            --verde: #2ecc71;
+            --azul: #3498db;
+        }
 
-    section {
-      padding: 20px;
-      max-width: 1000px;
-      margin: 20px auto;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px #b39ddb55;
-    }
+        * {
+            box-sizing: border-box
+        }
 
-    h2 {
-      color: #7b1fa2;
-      margin-top: 32px;
-      text-align: center;
-    }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #f3e7fe 0%, #e3f0ff 100%);
+            color: #333;
+            line-height: 1.55;
+        }
 
-    blockquote {
-      background: #ede7f6;
-      border-left: 6px solid #7b1fa2;
-      padding: 16px 24px;
-      margin: 24px 0;
-      font-style: italic;
-    }
+        header {
+            background: linear-gradient(90deg, var(--roxo) 60%, var(--roxo-esc) 100%);
+            color: #fff;
+            text-align: center;
+            padding: 24px 12px;
+            box-shadow: 0 2px 8px #0001;
+        }
 
-    footer {
-      background: #ddd;
-      text-align: center;
-      padding: 16px;
-      margin-top: 40px;
-      font-size: 1em;
-      border-top: 1px solid #ccc;
-    }
+        header h1 {
+            color: darkgoldenrod;
+        }
 
-    /* 🎴 Jogo da Memória */
-    .game-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-      gap: 10px;
-      max-width: 400px;
-      margin: 20px auto;
-    }
+        main {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 4vw;
+            width: 100%;
+        }
 
-    .card {
-      aspect-ratio: 1/1;
-      background: #3498db;
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 1.2em;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.2s;
-    }
+        section.card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 4vw 3vw;
+            margin: 16px 0;
+            box-shadow: 0 4px 24px #b39ddb55;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            min-width: 0;
+        }
 
-    .card.flipped {
-      background: #2ecc71;
-    }
+        h2 {
+            color: var(--roxo);
+            margin: 8px 0 16px;
+            text-align: center;
+            font-size: clamp(18px, 2.8vw, 28px)
+        }
 
-    .card.matched {
-      background: #95a5a6;
-      cursor: default;
-    }
+        .hint {
+            font-size: .95rem;
+            color: #555;
+            text-align: center;
+            margin: 8px 0 14px
+        }
 
-    /* 🔤 Caça-palavras */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(34px, 1fr));
-      gap: 4px;
-      max-width: 360px;
-      margin: 10px auto;
-    }
+        /* ===== JOGO DA MEMÓRIA ===== */
+        .memory-grid {
+            display: grid;
+            gap: 10px;
+            margin: 10px auto;
+            width: min(333px, 85vw);
+            grid-template-columns: repeat(4, 1fr);
+        }
 
-    .cell {
-      aspect-ratio: 1/1;
-      background: #fff;
-      border: 1px solid #ccc;
-      font-size: 1em;
-      font-weight: bold;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 4px;
-    }
+        .card {
+            /* aspect-ratio: 1/1; */
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--azul);
+            color: #fff;
+            font-weight: 700;
+            font-size: clamp(14px, 4.5vw, 20px);
+            user-select: none;
+            cursor: pointer;
+            transition: transform .15s, background .15s;
+        }
 
-    .cell.selected {
-      background: #ffeaa7;
-    }
+        .card:active {
+            /* transform: scale(.97) */
+        }
 
-    .cell.found {
-      background: #81ecec;
-    }
+        .card.flipped {
+            background: var(--verde)
+        }
 
-    .word-list li.found {
-      text-decoration: line-through;
-      color: green;
-    }
+        .card.matched {
+            background: var(--acinza);
+            cursor: default
+        }
 
-    #currentWord {
-      margin-top: 10px;
-      font-size: 18px;
-      color: #2d3436;
-      text-align: center;
-    }
+        /* ===== CAÇA-PALAVRAS ===== */
+        .ws-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px
+        }
 
-    /* ⛓ Jogos da Forca */
-    .forca {
-      margin: 20px auto;
-      max-width: 500px;
-      text-align: center;
-    }
+        .ws-grid {
+            display: grid;
+            gap: 4px;
+            width: min(333px, 85vw);
+            grid-template-columns: repeat(10, 1fr);
+        }
 
-    .word {
-      font-size: 1.6em;
-      letter-spacing: 6px;
-      margin: 15px 0;
-    }
+        .cell {
+            aspect-ratio: 1/1;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: clamp(14px, 4.2vw, 18px);
+            background: #fff;
+            user-select: none;
+            touch-action: none;
+        }
 
-    .letters {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 10px;
-    }
+        .cell.sel {
+            background: #ffeaa7
+        }
 
-    .letters button {
-      flex: 1 1 calc(20% - 6px);
-      max-width: 60px;
-      padding: 10px;
-      font-size: 1em;
-      border: none;
-      border-radius: 8px;
-      background: #7b1fa2;
-      color: white;
-      cursor: pointer;
-    }
+        .cell.ok {
+            background: #81ecec
+        }
 
-    .letters button:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-    }
+        .ws-controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px
+        }
 
-    #hangman,
-    .msg {
-      margin-top: 15px;
-      font-size: 1.2em;
-    }
+        .btn {
+            border: none;
+            background: var(--roxo);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
-    /* 📌 Complete o Versículo */
-    .dropzone {
-      display: inline-block;
-      min-width: 60px;
-      padding: 4px;
-      border-bottom: 2px dashed #7b1fa2;
-    }
+        .btn:disabled {
+            background: #bbb;
+            cursor: not-allowed
+        }
 
-    .opcao {
-      display: inline-block;
-      margin: 6px;
-      padding: 8px 12px;
-      background: #7b1fa2;
-      color: white;
-      border-radius: 6px;
-      cursor: grab;
-    }
+        ul.word-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding: 0;
+            margin: 8px 0
+        }
 
-    /* 🔢 Caça-Número */
-    #numerosGrid {
-      display: grid;
-      grid-template-columns: repeat(8, 40px);
-      gap: 5px;
-      justify-content: center;
-    }
+        .word-list li {
+            list-style: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: #f4f4f8;
+            font-weight: 600
+        }
 
-    .numCell {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f1c40f;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+        .word-list li.found {
+            text-decoration: line-through;
+            color: green;
+            background: #eafff0
+        }
 
-    .numCell.found {
-      background: #2ecc71;
-      color: white;
-    }
+        /* ===== FORCA ===== */
+        .forca {
+            text-align: center
+        }
 
-    /* 📜 Ordem da Criação */
-    .etapa {
-      display: inline-block;
-      margin: 6px;
-      padding: 10px 16px;
-      background: #3498db;
-      color: white;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+        .letters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 10px
+        }
 
-    .etapa.certo {
-      background: #2ecc71;
-    }
+        .letters button {
+            border: none;
+            background: var(--roxo);
+            color: #fff;
+            padding: 10px 0;
+            border-radius: 8px;
+            min-width: 36px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
 
-    .etapa.errado {
-      background: #e74c3c;
-    }
-  </style>
+        /* Responsividade extra para celulares pequenos */
+        @media (max-width: 480px) {
+            header {
+                padding: 16px 4px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            section.card {
+                padding: 4vw 2vw;
+            }
+
+            .memory-grid {
+                gap: 6px;
+            }
+
+            .ws-grid {
+                gap: 2px;
+            }
+
+            .letters button {
+                padding: 8px 0;
+                min-width: 28px;
+                font-size: 1em;
+            }
+
+            .chip,
+            .ordem-item {
+                font-size: 0.95em;
+                padding: 7px 8px;
+            }
+
+            .dropzone {
+                min-width: 48px;
+                font-size: 0.95em;
+            }
+        }
+
+        .letters button:disabled {
+            background: #ccc
+        }
+
+        .word {
+            font-size: clamp(18px, 4.8vw, 26px);
+            letter-spacing: 8px;
+            margin: 12px 0
+        }
+
+        /* ===== COMPLETE O VERSÍCULO ===== */
+        .dropzone {
+            display: inline-block;
+            min-width: 72px;
+            padding: 4px 6px;
+            border-bottom: 2px dashed var(--roxo);
+            text-align: center
+        }
+
+        .chip {
+            display: inline-block;
+            margin: 6px;
+            padding: 8px 12px;
+            background: var(--roxo);
+            color: #fff;
+            border-radius: 999px;
+            cursor: grab;
+            user-select: none;
+        }
+
+        /* ===== ORDEM DA CRIAÇÃO (DRAG SORT) ===== */
+        .ordem-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center
+        }
+
+        .ordem-item {
+            background: var(--azul);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            cursor: grab;
+            user-select: none
+        }
+
+        .ordem-item.dragging {
+            opacity: .6;
+            outline: 3px dashed #0003
+        }
+
+        .ordem-list.drop {
+            outline: 3px dashed #0002;
+            padding: 10px;
+            border-radius: 14px
+        }
+
+        /* ===== POPUP ===== */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            width: min(90%, 400px);
+            box-shadow: 0 4px 18px #0005;
+            animation: scaleIn .2s ease;
+            color: black;
+        }
+
+        .popup-content h3 {
+            margin-top: 0;
+            color: var(--roxo)
+        }
+
+        .popup .close {
+            float: right;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #555;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(.8);
+                opacity: 0
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        .info-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 6px;
+        }
+
+        footer {
+            text-align: center;
+            color: #555;
+            padding: 18px 8px;
+            font-size: .95rem
+        }
+    </style>
 </head>
 
 <body>
-  <header>
-    <h1><span style="color:#ff9800;">A Mulher</span> e o Dragão</h1>
-    <p>Apocalipse 12</p>
-  </header>
+    <header>
+        <h1>A Mulher e o Dragão</h1>
+        <div>Apocalipse 12</div>
+    </header>
 
-  <section>
-    <h2>Texto Bíblico</h2>
-    <blockquote>
-      "Apareceu no céu um grande sinal: uma mulher vestida do sol, com a lua debaixo dos pés, e uma coroa de doze estrelas na cabeça." (Apocalipse 12:1)
-    </blockquote>
+    <main>
 
-    <h2>🎴 Jogo da Memória</h2>
-    <div id="memoryGame" class="game-container"></div>
+        <!-- ====================== infomacional ====================== -->
 
-    <h2>🔤 Caça-Palavras</h2>
-    <div id="wordsearch" class="grid"></div>
-    <p id="currentWord"></p>
-    <ul class="word-list">
-      <li>Mulher</li>
-      <li>Dragão</li>
-      <li>Céu</li>
-      <li>Estrelas</li>
-      <li>Vitória</li>
-    </ul>
+        <section class="card" id="memoria">
+            <!-- 1️⃣ Apocalipse 12: Mulher Vestida de Sol -->
+            <!-- Nossa Senhora das Graças -->
+            <h2>
+                <button class="info-btn" onclick="openPopup('memoriaInfo7')">
+                    ℹ ✨ Nossa Senhora das Graças
+                </button>
+            </h2>
+            <div class="popup" id="memoriaInfo7">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup('memoriaInfo7')">&times;</span>
+                    <p>
+                        Nossa Senhora das Graças apareceu a Santa Catarina Labouré em 1830, pedindo que fosse criada a
+                        Medalha Milagrosa.
+                        Na medalha, Maria aparece sobre o globo, esmagando a serpente, com raios de luz saindo de suas
+                        mãos, simbolizando as graças que concede.
+                        Representa intercessão, proteção e condução espiritual para os fiéis.
+                    </p>
+                </div>
+            </div>
+            <!-- 4️⃣ O Dragão Vermelho -->
+            <h2>
+                <button class="info-btn" onclick="openPopup('memoriaInfo4')">
+                    ℹ 🐉 O Dragão Vermelho
+                </button>
+            </h2>
+            <div class="popup" id="memoriaInfo4">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup('memoriaInfo4')">&times;</span>
+                    <p>
+                        Representa Satanás, inimigo da humanidade. Tenta destruir o filho da mulher e impedir o plano de
+                        Deus.
+                        Símbolo de mal, engano e perseguição espiritual.
+                        A batalha entre a mulher e o dragão mostra a vitória de Deus e a proteção sobre os fiéis.
+                    </p>
+                </div>
+            </div>
 
-    <h2>⛓ Jogo da Forca</h2>
-    <div class="forca">
-      <p id="hangman"></p>
-      <p id="word"></p>
-      <div id="letters" class="letters"></div>
-      <p class="msg" id="msg"></p>
-    </div>
+            <!-- 5️⃣ O Filho do Céu -->
+            <h2>
+                <button class="info-btn" onclick="openPopup('memoriaInfo5')">
+                    ℹ 👶 O Filho do Céu
+                </button>
+            </h2>
+            <div class="popup" id="memoriaInfo5">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup('memoriaInfo5')">&times;</span>
+                    <p>
+                        O filho que há de reger todas as nações com cetro de ferro é uma referência a Jesus Cristo.
+                        Ele representa justiça, liderança divina e esperança.
+                        Sua proteção e vitória sobre o dragão simbolizam a salvação da humanidade.
+                    </p>
+                </div>
+            </div>
 
-    <h2>📌 Complete o Versículo</h2>
-    <p>
-      "E houve guerra no <span class="dropzone" data-palavra="céu"></span>: Miguel e os seus anjos
-      batalhavam contra o <span class="dropzone" data-palavra="dragão"></span>." (Apocalipse 12:7)
-    </p>
-    <div>
-      <span class="opcao" draggable="true">céu</span>
-      <span class="opcao" draggable="true">dragão</span>
-      <span class="opcao" draggable="true">mulher</span>
-    </div>
+            <!-- 6️⃣ Fuga para o Deserto -->
+            <h2>
+                <button class="info-btn" onclick="openPopup('memoriaInfo6')">
+                    ℹ 🌵 Fuga para o Deserto
+                </button>
+            </h2>
+            <div class="popup" id="memoriaInfo6">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup('memoriaInfo6')">&times;</span>
+                    <p>
+                        A mulher foge para o deserto, protegida por Deus.
+                        Símbolo de refúgio, perseverança e cuidado divino em tempos de perseguição.
+                        Ensina que mesmo nas dificuldades, a fé garante proteção e força espiritual.
+                    </p>
+                </div>
+            </div>
 
-    <h2>🔢 Caça-Número</h2>
-    <div id="numerosGrid"></div>
-    <p id="numMsg" style="text-align:center; font-weight:bold;"></p>
+            <h2>
+                <button class="info-btn" onclick="openPopup('memoriaInfo1')">
+                    ℹ 📖 Apocalipse 12: Mulher Vestida de Sol
+                </button>
+            </h2>
+            <div class="popup" id="memoriaInfo1">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup('memoriaInfo1')">&times;</span>
+                    <p>
+                        Mulher vestida de sol, com a lua sob os pés e uma coroa de 12 estrelas. Grávida, prestes a dar à
+                        luz, enfrenta o dragão vermelho que tenta devorar seu filho.
+                        O filho regerá todas as nações com cetro de ferro — referência messiânica a Jesus Cristo.
+                        A mulher foge para o deserto, protegida por Deus.
+                        Interpretação: representa Maria e a Igreja, sinalizando vitória sobre o mal.
+                    </p>
+                </div>
+            </div>
 
-    <h2>📜 Ordem da Criação</h2>
-    <div id="ordemGame"></div>
-    <p id="ordemMsg" style="font-weight:bold; text-align:center;"></p>
-  </section>
+            <!-- 2️⃣ Medalha Milagrosa -->
+            <h2>
+                <button class="info-btn" onclick="openPopup('memoriaInfo2')">
+                    ℹ ✨ Medalha Milagrosa
+                </button>
+            </h2>
+            <div class="popup" id="memoriaInfo2">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup('memoriaInfo2')">&times;</span>
+                    <p>
+                        Surgiu em 1830, quando Maria apareceu a Santa Catarina Labouré.
+                        Frente: Maria sobre o globo, esmagando a serpente, com raios de luz saindo de suas mãos,
+                        inscrição “Ó Maria concebida sem pecado...”.
+                        Verso: M entrelaçado com cruz, dois corações (Jesus e Maria), 12 estrelas.
+                        Significado: intercessão de Maria, proteção, graças e sinal da presença de Deus.
+                    </p>
+                </div>
+            </div>
 
-  <footer>
-    <p><strong>Versículos:</strong> Gênesis 3:15 • Apocalipse 12:17</p>
-  </footer>
+            <!-- 3️⃣ Visão espiritual integrada -->
+            <h2>
+                <button class="info-btn" onclick="openPopup('memoriaInfo3')">
+                    ℹ 🌟 Visão espiritual integrada
+                </button>
+            </h2>
+            <div class="popup" id="memoriaInfo3">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup('memoriaInfo3')">&times;</span>
+                    <p>
+                        Apocalipse 12 e a Medalha Milagrosa se conectam na mensagem de fé: Maria como mãe, Igreja e
+                        dispensadora das graças.
+                        Demonstra a proteção divina, a luta contra o mal e a esperança em Cristo.
+                        Símbolos como estrelas, globo e corações reforçam a espiritualidade e o plano de salvação.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-  <audio autoplay loop>
-    <source src="./1.mp3" type="audio/mpeg">
-  </audio>
 
-  <script>
-    // 🎴 Jogo da Memória
-    (function () {
-      const items = ["☀️", "🌙", "⭐", "🐉", "👑", "👩"];
-      const game = [...items, ...items].sort(() => Math.random() - 0.5);
-      const container = document.getElementById("memoryGame");
-      let flipped = [];
-      game.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.dataset.value = item;
-        card.textContent = "?";
-        card.onclick = () => {
-          if (card.classList.contains("flipped") || flipped.length === 2) return;
-          card.textContent = item;
-          card.classList.add("flipped");
-          flipped.push(card);
-          if (flipped.length === 2) {
-            if (flipped[0].dataset.value === flipped[1].dataset.value) {
-              flipped.forEach(c => c.classList.add("matched"));
-            } else {
-              setTimeout(() => flipped.forEach(c => {
-                c.classList.remove("flipped");
+
+
+        <!-- ====================== MEMÓRIA ====================== -->
+        <section class="card" id="memoria">
+            <h2>🎴 Jogo da Memória</h2>
+            <p class="hint">Encontre os pares. Cartas erradas viram de volta 😉</p>
+            <div class="memory-grid" id="memoryGrid" aria-label="Jogo da memória"></div>
+            <p id="memoryMsg" class="hint" style="font-weight:700"></p>
+        </section>
+
+        <!-- ====================== CAÇA-PALAVRAS ====================== -->
+        <section class="card" id="caca">
+            <h2>🔤 Caça-palavras</h2>
+            <p class="hint">Toque/clique nas letras em sequência para formar palavras. Use “Limpar” para recomeçar.</p>
+            <div class="ws-wrap">
+                <div class="ws-grid" id="wsGrid" aria-label="Caça-palavras"></div>
+                <div class="ws-controls">
+                    <button class="btn" id="wsClear">Limpar</button>
+                    <div id="wsCurrent" style="font-weight:700"></div>
+                </div>
+                <ul class="word-list" id="wsList"></ul>
+            </div>
+        </section>
+
+        <!-- ====================== FORCA ====================== -->
+        <section class="card" id="forca">
+            <h2>⛓ Jogo da Forca</h2>
+            <div class="forca">
+                <div id="forcaStatus">Erros: 0/6</div>
+                <div class="word" id="forcaWord"></div>
+                <div class="letters" id="forcaLetters"></div>
+                <div id="forcaMsg" class="hint" style="font-weight:700"></div>
+            </div>
+        </section>
+
+        <!-- ====================== COMPLETE O VERSÍCULO ====================== -->
+        <section class="card" id="verso">
+            <h2>📌 Complete o Versículo</h2>
+            <p class="hint">Arraste as palavras certas para os espaços.</p>
+            <p>
+                “E houve guerra no <span class="dropzone" data-word="céu"></span>:
+                Miguel e os seus anjos batalhavam contra o <span class="dropzone" data-word="dragão"></span>.” (Ap 12:7)
+            </p>
+            <div id="verseOptions">
+                <span class="chip" draggable="true">céu</span>
+                <span class="chip" draggable="true">dragão</span>
+                <span class="chip" draggable="true">mulher</span>
+            </div>
+            <p id="verseMsg" class="hint" style="font-weight:700"></p>
+        </section>
+
+        <!-- ====================== ORDEM DA CRIAÇÃO ====================== -->
+        <section class="card" id="ordem">
+            <h2>📜 Ordem da Criação</h2>
+            <p class="hint">Arraste para colocar na ordem correta (1→5). Toque e arraste funciona no celular.</p>
+            <ol class="ordem-list" id="ordemList"></ol>
+            <div style="text-align:center; margin-top:10px">
+                <button class="btn" id="ordemCheck">Verificar ordem</button>
+            </div>
+            <p id="ordemMsg" class="hint" style="font-weight:700"></p>
+        </section>
+
+    </main>
+
+    <footer>
+        <strong>Versículos:</strong> Gênesis 3:15 • Apocalipse 12:7 • Apocalipse 12:17
+    </footer>
+
+    <script>
+        /* ======================= UTIL ======================= */
+        function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; }
+        /* ======================= MEMÓRIA ======================= */
+        (function () {
+            const symbols = ["☀️", "🌙", "⭐", "🐉", "👑", "👩", "👼", "🌵"];
+            const deck = shuffle([...symbols, ...symbols]);
+            const grid = document.getElementById('memoryGrid');
+            const msg = document.getElementById('memoryMsg');
+
+            let first = null, second = null, lock = false, matches = 0;
+
+            deck.forEach(val => {
+                const c = document.createElement('button');
+                c.type = "button";
+                c.className = 'card';
+                c.setAttribute('aria-label', 'carta');
+                c.dataset.value = val;
                 c.textContent = "?";
-              }), 800);
+                c.addEventListener('click', onFlip, { passive: true });
+                grid.appendChild(c);
+            });
+
+            function onFlip() {
+                if (lock) return;
+                if (this.classList.contains('flipped') || this.classList.contains('matched')) return;
+
+                this.classList.add('flipped');
+                this.textContent = this.dataset.value;
+
+                if (!first) { first = this; return; }
+                second = this;
+
+                if (first.dataset.value === second.dataset.value) {
+                    // acerto
+                    first.classList.add('matched'); second.classList.add('matched');
+                    first.setAttribute('disabled', ''); second.setAttribute('disabled', '');
+                    first = null; second = null; matches++;
+                    if (matches === symbols.length) { msg.textContent = "🎉 Parabéns! Você encontrou todos os pares."; }
+                } else {
+                    // erro -> esconder depois de 800ms (com bloqueio)
+                    lock = true;
+                    setTimeout(() => {
+                        [first, second].forEach(el => {
+                            el.classList.remove('flipped');
+                            el.textContent = "?";
+                        });
+                        first = null; second = null; lock = false;
+                    }, 800);
+                }
             }
-            flipped = [];
-          }
-        };
-        container.appendChild(card);
-      });
-    })();
+        })();
 
-    // 🔤 Caça-palavras (simplificado)
-    (function () {
-      const palavras = ["MULHER", "DRAGÃO", "CÉU", "ESTRELAS", "VITÓRIA"];
-      const grid = document.getElementById("wordsearch");
-      const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      for (let i = 0; i < 100; i++) {
-        const div = document.createElement("div");
-        div.className = "cell";
-        div.textContent = letras[Math.floor(Math.random() * letras.length)];
-        grid.appendChild(div);
-      }
-    })();
+        /* ======================= CAÇA-PALAVRAS ======================= */
+        (function () {
+            const palavras = ["JESUS", "MARIA", "ROSARIO", "FE", "ORACAO", "EVANGELHO"];
+            const size = 10;
+            const gridArr = Array(size * size).fill('');
+            const gridEl = document.getElementById('wsGrid');
+            const listEl = document.getElementById('wsList');
+            const curEl = document.getElementById('wsCurrent');
+            const clearBtn = document.getElementById('wsClear');
 
-    // ⛓ Jogo da Forca
-    (function () {
-      const palavras = ["MULHER", "DRAGAO", "CEU", "ESTRELAS"];
-      const palavra = palavras[Math.floor(Math.random() * palavras.length)];
-      let erros = 0, acertos = 0;
-      const wordEl = document.getElementById("word");
-      const msgEl = document.getElementById("msg");
-      const lettersEl = document.getElementById("letters");
-      wordEl.textContent = "_ ".repeat(palavra.length);
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(l => {
-        const btn = document.createElement("button");
-        btn.textContent = l;
-        btn.onclick = () => {
-          btn.disabled = true;
-          if (palavra.includes(l)) {
-            let novo = "";
-            for (let i = 0; i < palavra.length; i++) {
-              novo += palavra[i] === l ? l + " " : wordEl.textContent[2 * i] + " ";
+            // posiciona palavra horizontal ou vertical simples
+            function place(word) {
+                word = word.toUpperCase();
+                let ok = false, guard = 0;
+                while (!ok && guard < 500) {
+                    guard++;
+                    const horiz = Math.random() < 0.5;
+                    const row = Math.floor(Math.random() * size);
+                    const col = Math.floor(Math.random() * size);
+                    if (horiz && col + word.length <= size) {
+                        let fits = true;
+                        for (let i = 0; i < word.length; i++) {
+                            const idx = row * size + (col + i);
+                            if (gridArr[idx] && gridArr[idx] !== word[i]) { fits = false; break; }
+                        }
+                        if (fits) { for (let i = 0; i < word.length; i++) { gridArr[row * size + (col + i)] = word[i]; } ok = true; }
+                    } else if (!horiz && row + word.length <= size) {
+                        let fits = true;
+                        for (let i = 0; i < word.length; i++) {
+                            const idx = (row + i) * size + col;
+                            if (gridArr[idx] && gridArr[idx] !== word[i]) { fits = false; break; }
+                        }
+                        if (fits) { for (let i = 0; i < word.length; i++) { gridArr[(row + i) * size + col] = word[i]; } ok = true; }
+                    }
+                }
             }
-            wordEl.textContent = novo;
-            acertos++;
-            if (!novo.includes("_")) msgEl.textContent = "🎉 Você venceu!";
-          } else {
-            erros++;
-            if (erros > 5) msgEl.textContent = "☠️ Game Over!";
-          }
-        };
-        lettersEl.appendChild(btn);
-      });
-    })();
+            palavras.forEach(place);
+            // completa com letras aleatórias
+            for (let i = 0; i < gridArr.length; i++) {
+                if (!gridArr[i]) gridArr[i] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+            }
 
-    // 📌 Complete o Versículo
-    document.querySelectorAll(".opcao").forEach(o => {
-      o.ondragstart = e => e.dataTransfer.setData("text", o.textContent);
-    });
-    document.querySelectorAll(".dropzone").forEach(d => {
-      d.ondragover = e => e.preventDefault();
-      d.ondrop = e => {
-        const palavra = e.dataTransfer.getData("text");
-        if (palavra === d.dataset.palavra) {
-          d.textContent = palavra;
-          d.style.color = "green";
-        } else {
-          d.style.color = "red";
+            // monta UI
+            let current = "", currentCells = [];
+            function updateCurrent() { curEl.textContent = "Atual: " + (current || "—"); }
+            function clearSel() {
+                current = ""; currentCells.forEach(c => c.classList.remove('sel')); currentCells = [];
+                updateCurrent();
+            }
+
+            // lista de palavras
+            palavras.forEach(p => {
+                const li = document.createElement('li'); li.textContent = p; listEl.appendChild(li);
+            });
+
+            gridArr.forEach((ch, idx) => {
+                const cell = document.createElement('div'); cell.className = 'cell'; cell.textContent = ch;
+                cell.addEventListener('click', () => {
+                    // evita selecionar a mesma célula duas vezes seguidas
+                    if (currentCells[currentCells.length - 1] === cell) return;
+                    cell.classList.add('sel'); currentCells.push(cell); current += ch; updateCurrent();
+
+                    // acerto (frente ou reverso)
+                    const hit = palavras.includes(current) || palavras.includes(current.split('').reverse().join(''));
+                    if (hit) {
+                        currentCells.forEach(c => { c.classList.remove('sel'); c.classList.add('ok'); });
+                        // risca na lista
+                        [...listEl.children].forEach(li => {
+                            if (li.textContent === current || li.textContent === current.split('').reverse().join('')) li.classList.add('found');
+                        });
+                        current = ""; currentCells = []; updateCurrent();
+                    }
+                }, { passive: true });
+                gridEl.appendChild(cell);
+            });
+
+            clearBtn.addEventListener('click', clearSel);
+            updateCurrent();
+        })();
+
+        /* ======================= FORCA ======================= */
+        (function () {
+            const palavras = ["APOCALIPSE", "DRAGAO", "MULHER", "DESERTO", "ESTRELAS"];
+            const secret = palavras[Math.floor(Math.random() * palavras.length)];
+            const status = document.getElementById('forcaStatus');
+            const wordEl = document.getElementById('forcaWord');
+            const lettersEl = document.getElementById('forcaLetters');
+            const msgEl = document.getElementById('forcaMsg');
+
+            let erros = 0, max = 6;
+            const discovered = secret.split('').map(() => "_");
+
+            function renderWord() { wordEl.textContent = discovered.join(' '); }
+            function endGame(win) {
+                [...lettersEl.children].forEach(b => b.disabled = true);
+                msgEl.textContent = win ? "🎉 Você venceu!" : `☠️ Game Over! A palavra era: ${secret}`;
+            }
+
+            // teclado
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('').forEach(l => {
+                const b = document.createElement('button'); b.textContent = l;
+                b.addEventListener('click', () => {
+                    b.disabled = true;
+                    if (secret.includes(l)) {
+                        secret.split('').forEach((ch, i) => { if (ch === l) discovered[i] = l; });
+                        renderWord();
+                        if (!discovered.includes("_")) endGame(true);
+                    } else {
+                        erros++; status.textContent = `Erros: ${erros}/${max}`;
+                        if (erros >= max) endGame(false);
+                    }
+                });
+                lettersEl.appendChild(b);
+            });
+            renderWord(); status.textContent = `Erros: ${erros}/${max}`;
+        })();
+
+        /* ======================= COMPLETE O VERSÍCULO ======================= */
+        (function () {
+            const chips = document.querySelectorAll('#verseOptions .chip');
+            const drops = document.querySelectorAll('.dropzone');
+            const msg = document.getElementById('verseMsg');
+
+            chips.forEach(ch => {
+                ch.addEventListener('dragstart', e => e.dataTransfer.setData('text/plain', ch.textContent));
+            });
+            drops.forEach(d => {
+                d.addEventListener('dragover', e => e.preventDefault());
+                d.addEventListener('drop', e => {
+                    e.preventDefault();
+                    const t = e.dataTransfer.getData('text/plain');
+                    if (t === d.dataset.word) {
+                        d.textContent = t; d.style.color = 'green';
+                        // feedback final
+                        const allOk = [...drops].every(x => x.textContent.trim().length > 0);
+                        if (allOk) msg.textContent = "✅ Muito bem! Versículo completo.";
+                    } else {
+                        d.style.color = 'red';
+                        setTimeout(() => { d.style.color = ''; }, 600);
+                    }
+                });
+            });
+        })();
+
+        /* ======================= ORDEM DA CRIAÇÃO (DRAG SORT) ======================= */
+        (function () {
+            const correta = ["Luz", "Céu", "Terra", "Animais", "Homem"];
+            const itens = shuffle([...correta]);
+            const list = document.getElementById('ordemList');
+            const checkBtn = document.getElementById('ordemCheck');
+            const msg = document.getElementById('ordemMsg');
+
+            itens.forEach(txt => {
+                const li = document.createElement('li');
+                li.className = 'ordem-item'; li.textContent = txt; li.draggable = true;
+                li.addEventListener('dragstart', () => { li.classList.add('dragging'); list.classList.add('drop'); });
+                li.addEventListener('dragend', () => { li.classList.remove('dragging'); list.classList.remove('drop'); });
+                list.appendChild(li);
+            });
+
+            list.addEventListener('dragover', e => {
+                e.preventDefault();
+                const dragging = document.querySelector('.ordem-item.dragging');
+                const after = getDragAfterElement(list, e.clientX, e.clientY);
+                if (after == null) list.appendChild(dragging);
+                else list.insertBefore(dragging, after);
+            });
+
+            function getDragAfterElement(container, x, y) {
+                const els = [...container.querySelectorAll('.ordem-item:not(.dragging)')];
+                return els.reduce((closest, child) => {
+                    const rect = child.getBoundingClientRect();
+                    const offset = y - rect.top - rect.height / 2;
+                    if (offset < 0 && offset > closest.offset) return { offset, element: child };
+                    else return closest;
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+
+            checkBtn.addEventListener('click', () => {
+                const ordemAtual = [...list.children].map(li => li.textContent);
+                const ok = ordemAtual.every((v, i) => v === correta[i]);
+                msg.textContent = ok ? "🎉 Ordem correta!" :
+                    "❌ Ainda não. Tente ajustar a ordem: Luz → Céu → Terra → Animais → Homem.";
+                msg.style.color = ok ? "green" : "";
+            });
+        })();
+        function openPopup(id) {
+            document.getElementById(id).style.display = "flex";
         }
-      };
-    });
+        function closePopup(id) {
+            document.getElementById(id).style.display = "none";
+        }
 
-    // 🔢 Caça-Número
-    (function () {
-      const grid = document.getElementById("numerosGrid");
-      for (let i = 1; i <= 40; i++) {
-        const cell = document.createElement("div");
-        cell.className = "numCell";
-        cell.textContent = i;
-        cell.onclick = () => {
-          if (i % 7 === 0) {
-            cell.classList.add("found");
-            document.getElementById("numMsg").textContent = "✅ Você encontrou os múltiplos de 7!";
-          }
-        };
-        grid.appendChild(cell);
-      }
-    })();
-
-    // 📜 Ordem da Criação
-    (function () {
-      const etapas = ["Luz", "Céu", "Terra", "Animais", "Homem"];
-      const ordemDiv = document.getElementById("ordemGame");
-      etapas.sort(() => Math.random() - 0.5).forEach(e => {
-        const div = document.createElement("div");
-        div.className = "etapa";
-        div.textContent = e;
-        div.onclick = () => {
-          if (div.textContent === etapas[ordemDiv.children.length - 1]) {
-            div.classList.add("certo");
-          } else {
-            div.classList.add("errado");
-          }
-        };
-        ordemDiv.appendChild(div);
-      });
-    })();
-  </script>
+    </script>
 </body>
 
 </html>
