@@ -30,14 +30,26 @@
 
         header {
             background: linear-gradient(90deg, var(--roxo) 60%, var(--roxo-esc) 100%);
-            color: #fff;
+            color: #000;
             text-align: center;
             padding: 24px 12px;
             box-shadow: 0 2px 8px #0001;
+            display: flex;
+        }
+
+        .header-text {
+            width: 68rem;
+
+        }
+
+        .header-image {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
         }
 
         header h1 {
-            color: darkgoldenrod;
+            color: rgb(255, 185, 8);
         }
 
         main {
@@ -91,7 +103,7 @@
             align-items: center;
             justify-content: center;
             background: var(--azul);
-            color: #fff;
+            color: #000;
             font-weight: 700;
             font-size: clamp(14px, 4.5vw, 20px);
             user-select: none;
@@ -158,7 +170,7 @@
         .btn {
             border: none;
             background: var(--roxo);
-            color: #fff;
+            color: #000;
             padding: 8px 12px;
             border-radius: 8px;
             font-weight: 600;
@@ -193,70 +205,61 @@
             background: #eafff0
         }
 
-        /* ===== FORCA ===== */
-        .forca {
-            text-align: center
-        }
-
-        .letters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            justify-content: center;
-            margin-top: 10px
-        }
-
-        .letters button {
-            border: none;
-            background: var(--roxo);
-            color: #fff;
-            padding: 10px 0;
-            border-radius: 8px;
-            min-width: 36px;
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 1.1em;
-        }
 
         /* Responsividade extra para celulares pequenos */
         @media (max-width: 480px) {
             header {
-                padding: 16px 4px;
-            }
-
-            h1 {
-                font-size: 1.3em;
-            }
-
-            section.card {
-                padding: 4vw 2vw;
-            }
-
-            .memory-grid {
-                gap: 6px;
-            }
-
-            .ws-grid {
-                gap: 2px;
-            }
-
-            .letters button {
-                padding: 8px 0;
-                min-width: 28px;
-                font-size: 1em;
-            }
-
-            .chip,
-            .ordem-item {
-                font-size: 0.95em;
-                padding: 7px 8px;
-            }
-
-            .dropzone {
-                min-width: 48px;
-                font-size: 0.95em;
+                
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                    flex-direction: column;
+                
             }
         }
+
+        h1 {
+            font-size: 1.3em;
+        }
+
+        section.card {
+            padding: 4vw 2vw;
+        }
+
+        .memory-grid {
+            gap: 6px;
+        }
+
+        .ws-grid {
+            gap: 2px;
+        }
+
+        .letters button {
+            padding: 8px 0;
+            min-width: 28px;
+            font-size: 1em;
+        }
+
+        .chip,
+        .ordem-item {
+            font-size: 0.95em;
+            padding: 7px 8px;
+        }
+
+        .header-text {
+            width: 68rem;
+
+        }
+
+        .header-image {
+                height: 5rem;
+        }
+
+        .dropzone {
+            min-width: 48px;
+            font-size: 0.95em;
+        }
+        
 
         .letters button:disabled {
             background: #ccc
@@ -282,39 +285,13 @@
             margin: 6px;
             padding: 8px 12px;
             background: var(--roxo);
-            color: #fff;
+            color: #000;
             border-radius: 999px;
             cursor: grab;
             user-select: none;
         }
 
-        /* ===== ORDEM DA CRIAÇÃO (DRAG SORT) ===== */
-        .ordem-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center
-        }
 
-        .ordem-item {
-            background: var(--azul);
-            color: #fff;
-            padding: 10px 14px;
-            border-radius: 12px;
-            cursor: grab;
-            user-select: none
-        }
-
-        .ordem-item.dragging {
-            opacity: .6;
-            outline: 3px dashed #0003
-        }
-
-        .ordem-list.drop {
-            outline: 3px dashed #0002;
-            padding: 10px;
-            border-radius: 14px
-        }
 
         /* ===== POPUP ===== */
         .popup {
@@ -371,6 +348,16 @@
             cursor: pointer;
             font-size: 18px;
             margin-left: 6px;
+            color: #0077cc;
+            /* Cor do texto */
+            text-decoration: none;
+            /* Remove o sublinhado */
+            font-weight: bold;
+        }
+
+        .info-btn:hover {
+            color: #005fa3;
+            text-decoration: underline;
         }
 
         footer {
@@ -384,8 +371,15 @@
 
 <body>
     <header>
-        <h1>A Mulher e o Dragão</h1>
-        <div>Apocalipse 12</div>
+        <div class="header-image">
+            <img src="./b02c69_176c18de92984b14be5dca00ca71b4c3_mv2-removebg-preview.png" alt=""
+                style="width: 8rem; height: 8rem; margin: 0 2rem;">
+        </div>
+        <div class="header-text">
+            <h1>A Mulher e o Dragão <div>Apocalipse 12</div>
+            </h1>
+        </div>
+
     </header>
 
     <main>
@@ -466,7 +460,7 @@
 
             <h2>
                 <button class="info-btn" onclick="openPopup('memoriaInfo1')">
-                    ℹ 📖 Apocalipse 12: Mulher Vestida de Sol
+                    ℹ Mulher Vestida de Sol
                 </button>
             </h2>
             <div class="popup" id="memoriaInfo1">
@@ -545,16 +539,7 @@
             </div>
         </section>
 
-        <!-- ====================== FORCA ====================== -->
-        <section class="card" id="forca">
-            <h2>⛓ Jogo da Forca</h2>
-            <div class="forca">
-                <div id="forcaStatus">Erros: 0/6</div>
-                <div class="word" id="forcaWord"></div>
-                <div class="letters" id="forcaLetters"></div>
-                <div id="forcaMsg" class="hint" style="font-weight:700"></div>
-            </div>
-        </section>
+
 
         <!-- ====================== COMPLETE O VERSÍCULO ====================== -->
         <section class="card" id="verso">
@@ -572,16 +557,7 @@
             <p id="verseMsg" class="hint" style="font-weight:700"></p>
         </section>
 
-        <!-- ====================== ORDEM DA CRIAÇÃO ====================== -->
-        <section class="card" id="ordem">
-            <h2>📜 Ordem da Criação</h2>
-            <p class="hint">Arraste para colocar na ordem correta (1→5). Toque e arraste funciona no celular.</p>
-            <ol class="ordem-list" id="ordemList"></ol>
-            <div style="text-align:center; margin-top:10px">
-                <button class="btn" id="ordemCheck">Verificar ordem</button>
-            </div>
-            <p id="ordemMsg" class="hint" style="font-weight:700"></p>
-        </section>
+
 
     </main>
 
@@ -722,42 +698,6 @@
             updateCurrent();
         })();
 
-        /* ======================= FORCA ======================= */
-        (function () {
-            const palavras = ["APOCALIPSE", "DRAGAO", "MULHER", "DESERTO", "ESTRELAS"];
-            const secret = palavras[Math.floor(Math.random() * palavras.length)];
-            const status = document.getElementById('forcaStatus');
-            const wordEl = document.getElementById('forcaWord');
-            const lettersEl = document.getElementById('forcaLetters');
-            const msgEl = document.getElementById('forcaMsg');
-
-            let erros = 0, max = 6;
-            const discovered = secret.split('').map(() => "_");
-
-            function renderWord() { wordEl.textContent = discovered.join(' '); }
-            function endGame(win) {
-                [...lettersEl.children].forEach(b => b.disabled = true);
-                msgEl.textContent = win ? "🎉 Você venceu!" : `☠️ Game Over! A palavra era: ${secret}`;
-            }
-
-            // teclado
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('').forEach(l => {
-                const b = document.createElement('button'); b.textContent = l;
-                b.addEventListener('click', () => {
-                    b.disabled = true;
-                    if (secret.includes(l)) {
-                        secret.split('').forEach((ch, i) => { if (ch === l) discovered[i] = l; });
-                        renderWord();
-                        if (!discovered.includes("_")) endGame(true);
-                    } else {
-                        erros++; status.textContent = `Erros: ${erros}/${max}`;
-                        if (erros >= max) endGame(false);
-                    }
-                });
-                lettersEl.appendChild(b);
-            });
-            renderWord(); status.textContent = `Erros: ${erros}/${max}`;
-        })();
 
         /* ======================= COMPLETE O VERSÍCULO ======================= */
         (function () {
@@ -786,54 +726,13 @@
             });
         })();
 
-        /* ======================= ORDEM DA CRIAÇÃO (DRAG SORT) ======================= */
-        (function () {
-            const correta = ["Luz", "Céu", "Terra", "Animais", "Homem"];
-            const itens = shuffle([...correta]);
-            const list = document.getElementById('ordemList');
-            const checkBtn = document.getElementById('ordemCheck');
-            const msg = document.getElementById('ordemMsg');
-
-            itens.forEach(txt => {
-                const li = document.createElement('li');
-                li.className = 'ordem-item'; li.textContent = txt; li.draggable = true;
-                li.addEventListener('dragstart', () => { li.classList.add('dragging'); list.classList.add('drop'); });
-                li.addEventListener('dragend', () => { li.classList.remove('dragging'); list.classList.remove('drop'); });
-                list.appendChild(li);
-            });
-
-            list.addEventListener('dragover', e => {
-                e.preventDefault();
-                const dragging = document.querySelector('.ordem-item.dragging');
-                const after = getDragAfterElement(list, e.clientX, e.clientY);
-                if (after == null) list.appendChild(dragging);
-                else list.insertBefore(dragging, after);
-            });
-
-            function getDragAfterElement(container, x, y) {
-                const els = [...container.querySelectorAll('.ordem-item:not(.dragging)')];
-                return els.reduce((closest, child) => {
-                    const rect = child.getBoundingClientRect();
-                    const offset = y - rect.top - rect.height / 2;
-                    if (offset < 0 && offset > closest.offset) return { offset, element: child };
-                    else return closest;
-                }, { offset: Number.NEGATIVE_INFINITY }).element;
-            }
-
-            checkBtn.addEventListener('click', () => {
-                const ordemAtual = [...list.children].map(li => li.textContent);
-                const ok = ordemAtual.every((v, i) => v === correta[i]);
-                msg.textContent = ok ? "🎉 Ordem correta!" :
-                    "❌ Ainda não. Tente ajustar a ordem: Luz → Céu → Terra → Animais → Homem.";
-                msg.style.color = ok ? "green" : "";
-            });
-        })();
         function openPopup(id) {
             document.getElementById(id).style.display = "flex";
         }
         function closePopup(id) {
             document.getElementById(id).style.display = "none";
         }
+
 
     </script>
 </body>
