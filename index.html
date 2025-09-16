@@ -8,12 +8,22 @@
 
     <style>
         :root {
-            --roxo: #7b1fa2;
-            --roxo-esc: #512da8;
-            --amarelo: #ffd54f;
-            --acinza: #95a5a6;
-            --verde: #2ecc71;
-            --azul: #3498db;
+            :root {
+                --roxo: #6a1b9a;
+                /* Roxo profundo */
+                --roxo-esc: #4527a0;
+                /* Roxo escuro */
+                --amarelo: #ffca28;
+                /* Amarelo dourado */
+                --acinza: #cfd8dc;
+                /* Cinza claro */
+                --verde: #43a047;
+                /* Verde vibrante */
+                --azul: #1e88e5;
+                /* Azul médio */
+                --fundo-gradiente: linear-gradient(135deg, #ede7f6 0%, #e3f2fd 100%);
+                --texto: #2c2c2c;
+            }
         }
 
         * {
@@ -29,29 +39,60 @@
         }
 
         header {
-            background: linear-gradient(90deg, var(--roxo) 60%, var(--roxo-esc) 100%);
-            color: #000;
-            text-align: center;
-            padding: 24px 12px;
-            box-shadow: 0 2px 8px #0001;
+            background: linear-gradient(90deg, #4a148c 0%, #6a1b9a 50%, #8e24aa 100%);
+            color: #fff;
+            padding: 32px 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border-bottom: 4px solid #ffca28;
+
+
         }
 
         .header-text {
-            width: 16rem;
+            flex: 1;
+            text-align: center;
+            padding: 0 12px;
+
 
         }
 
         .header-image {
+            flex: 0 0 auto;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            width: 14rem;
+            justify-content: center;
+
         }
 
         header h1 {
-            color: rgb(255, 185, 8);
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffeb3b;
+            text-shadow: 1px 1px 2px #000;
+            margin: 0;
+
         }
+
+        .header-image img {
+            width: 7rem;
+            height: 7rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            background: #fff;
+            padding: 6px;
+        }
+
+        header h1 div {
+            font-size: 1rem;
+            color: #fff;
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
 
         main {
             max-width: 1000px;
@@ -210,12 +251,12 @@
         /* Responsividade extra para celulares pequenos */
         @media (max-width: 480px) {
             header {
-                
-                    align-items: center;
-                    justify-content: center;
-                    display: flex;
-                    flex-direction: column;
-                
+
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                flex-direction: column;
+
             }
         }
 
@@ -253,14 +294,14 @@
         }
 
         .header-image {
-                height: 5rem;
+            height: 5rem;
         }
 
         .dropzone {
             min-width: 48px;
             font-size: 0.95em;
         }
-        
+
 
         .letters button:disabled {
             background: #ccc
@@ -343,26 +384,62 @@
             }
         }
 
-        .info-btn {
-                background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: purple;
-    margin-left: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    text-decoration: underline;
-    color: var(--roxo);
-    margin: 8px 0 16px;
+ .memoria-section {
+    background: linear-gradient(135deg, #f3e5f5, #e8f5e9);
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
     text-align: center;
-    font-size: clamp(18px, 2.8vw, 28px);
-        }
+}
 
-        .info-btn:hover {
-            color: #005fa3;
-            text-decoration: underline;
-        }
+.memoria-title {
+    font-size: 1.8rem;
+    color: var(--roxo);
+    margin-bottom: 24px;
+    font-weight: 700;
+}
+
+.memoria-doc {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 32px;
+}
+
+.memoria-topicos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.info-btn {
+    background: var(--roxo);
+    color: #000000;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.info-btn:hover {
+    background: var(--roxo-esc);
+    transform: scale(1.05);
+}
+
+.popup-content h3 {
+    font-size: 1.3rem;
+    color: var(--roxo);
+    margin-bottom: 12px;
+}
+
+.popup-content p {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
+}
 
         footer {
             text-align: center;
@@ -390,12 +467,33 @@
 
         <!-- ====================== infomacional ====================== -->
 
-        <section class="card" id="memoria">
-            <iframe src="https://1drv.ms/w/c/49ce18f06708f0a0/IQR_jyX00nWYQI0gSF69zcQNAaTeuSLoi2NDM3cEjUQYJL0" width="476px" height="288px" frameborder="0">Este é um documento do <a target="_blank" href="https://office.com">Microsoft Office</a> incorporado, da plataforma <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
-            <h2>
-                <button class="info-btn" onclick="openPopup('memoriaInfo7')">
-                    ℹ ✨ Nossa Senhora das Graças
-                </button>
+<section class="card memoria-section" id="memoria">
+    <div class=".">
+        <iframe src="https://1drv.ms/w/c/49ce18f06708f0a0/IQR_jyX00nWYQI0gSF69zcQNAaTeuSLoi2NDM3cEjUQYJL0?wdStartOn=1" width="388px" height="288px" frameborder="0">Este é um documento do <a target="_blank" href="https://office.com">Microsoft Office</a> incorporado, da plataforma <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+    </div>
+
+    <h2 class="memoria-title">🔍 Explore os Símbolos do Apocalipse 12</h2>
+
+    <div class="memoria-topicos">
+        <button class="info-btn" onclick="openPopup('memoriaInfo1')">🌞 Mulher Vestida de Sol</button>
+        <button class="info-btn" onclick="openPopup('memoriaInfo2')">✨ Medalha Milagrosa</button>
+        <button class="info-btn" onclick="openPopup('memoriaInfo3')">🌟 Visão Espiritual Integrada</button>
+        <button class="info-btn" onclick="openPopup('memoriaInfo4')">🐉 O Dragão Vermelho</button>
+        <button class="info-btn" onclick="openPopup('memoriaInfo5')">👶 O Filho do Céu</button>
+        <button class="info-btn" onclick="openPopup('memoriaInfo6')">🌵 Fuga para o Deserto</button>
+        <button class="info-btn" onclick="openPopup('memoriaInfo7')">💫 Nossa Senhora das Graças</button>
+    </div>
+
+    <!-- Popups seguem o mesmo padrão -->
+    <div class="popup" id="memoriaInfo1">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('memoriaInfo1')">&times;</span>
+            <h3>🌞 Mulher Vestida de Sol</h3>
+            <p>Com a lua sob os pés e coroa de 12 estrelas, representa Maria e a Igreja, sinalizando vitória sobre o mal.</p>
+        </div>
+    </div>
+     <h2>
+               
             </h2>
             <div class="popup" id="memoriaInfo7">
                 <div class="popup-content">
@@ -410,11 +508,7 @@
                 </div>
             </div>
             <!-- 4️⃣ O Dragão Vermelho -->
-            <h2>
-                <button class="info-btn" onclick="openPopup('memoriaInfo4')">
-                    ℹ 🐉 O Dragão Vermelho
-                </button>
-            </h2>
+            
             <div class="popup" id="memoriaInfo4">
                 <div class="popup-content">
                     <span class="close" onclick="closePopup('memoriaInfo4')">&times;</span>
@@ -428,11 +522,7 @@
             </div>
 
             <!-- 5️⃣ O Filho do Céu -->
-            <h2>
-                <button class="info-btn" onclick="openPopup('memoriaInfo5')">
-                    ℹ 👶 O Filho do Céu
-                </button>
-            </h2>
+       
             <div class="popup" id="memoriaInfo5">
                 <div class="popup-content">
                     <span class="close" onclick="closePopup('memoriaInfo5')">&times;</span>
@@ -445,11 +535,7 @@
             </div>
 
             <!-- 6️⃣ Fuga para o Deserto -->
-            <h2>
-                <button class="info-btn" onclick="openPopup('memoriaInfo6')">
-                    ℹ 🌵 Fuga para o Deserto
-                </button>
-            </h2>
+          
             <div class="popup" id="memoriaInfo6">
                 <div class="popup-content">
                     <span class="close" onclick="closePopup('memoriaInfo6')">&times;</span>
@@ -480,11 +566,7 @@
             </div>
 
             <!-- 2️⃣ Medalha Milagrosa -->
-            <h2>
-                <button class="info-btn" onclick="openPopup('memoriaInfo2')">
-                    ℹ ✨ Medalha Milagrosa
-                </button>
-            </h2>
+            
             <div class="popup" id="memoriaInfo2">
                 <div class="popup-content">
                     <span class="close" onclick="closePopup('memoriaInfo2')">&times;</span>
@@ -497,25 +579,10 @@
                     </p>
                 </div>
             </div>
+</section>
+           
 
-            <!-- 3️⃣ Visão espiritual integrada -->
-            <h2>
-                <button class="info-btn" onclick="openPopup('memoriaInfo3')">
-                    ℹ 🌟 Visão espiritual integrada
-                </button>
-            </h2>
-            <div class="popup" id="memoriaInfo3">
-                <div class="popup-content">
-                    <span class="close" onclick="closePopup('memoriaInfo3')">&times;</span>
-                    <p>
-                        Apocalipse 12 e a Medalha Milagrosa se conectam na mensagem de fé: Maria como mãe, Igreja e
-                        dispensadora das graças.
-                        Demonstra a proteção divina, a luta contra o mal e a esperança em Cristo.
-                        Símbolos como estrelas, globo e corações reforçam a espiritualidade e o plano de salvação.
-                    </p>
-                </div>
-            </div>
-        </section>
+
 
 
 
@@ -735,15 +802,9 @@
         function closePopup(id) {
             document.getElementById(id).style.display = "none";
         }
-
+        
 
     </script>
 </body>
 
 </html>
-
-
-
-
-
-
