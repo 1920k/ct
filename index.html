@@ -91,6 +91,89 @@
 
     /* footer */
     footer{margin-top:10px;text-align:center;color:var(--muted);font-size:0.86rem}
+
+    
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #ede7f6, #e3f2fd);
+      color: #2c2c2c;
+    }
+
+    header {
+      text-align: center;
+      background: linear-gradient(90deg, #4a148c, #6a1b9a);
+      color: #fff;
+      padding: 1.5rem;
+    }
+
+    header h1 {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: #ffeb3b;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 1rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      background: #fff;
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      box-shadow: 0 4px 18px #0001;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 0.8rem;
+      color: #6a1b9a;
+    }
+
+    .btn {
+      background: #6a1b9a;
+      color: #fff;
+      padding: 0.7rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #4527a0;
+      transform: scale(1.05);
+    }
+
+    /* Texto teatral */
+    .teatro {
+      background: #fef9e7;
+      border-left: 6px solid #fbc02d;
+      padding: 1.2rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .fala {
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    .fala strong {
+      color: #6a1b9a;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  
   </style>
 </head>
 <body>
@@ -128,6 +211,36 @@
           <li>Use o botão "Reiniciar" em cada jogo para jogar outra vez.</li>
         </ol>
       </div>
+      <br>
+      <br>
+      
+      <h2>🎭 Encenação Catequética</h2>
+
+      <div class="fala">
+        <strong>👩 Jovem 1 — Introdução:</strong><br>
+        “Hoje nós vamos falar sobre uma visão muito importante da Bíblia, que está no Apocalipse capítulo 12: A Mulher e o Dragão.
+        Essa passagem é cheia de símbolos. Cada um deles nos ajuda a entender a luta entre o bem e o mal e como Deus cuida de nós.
+        Vamos conhecer esses símbolos juntos.”
+      </div>
+
+      <div class="fala">
+        <strong>👦 Jovem 2 — Explicando os símbolos:</strong><br>
+        “A mulher vestida de sol representa Maria e também a Igreja.
+        Ela está com a lua debaixo dos pés e uma coroa de doze estrelas — isso mostra a vitória que Deus dá ao Seu povo.
+        O dragão vermelho é o símbolo do inimigo, Satanás, que tenta destruir o filho da mulher.
+        Esse filho é Jesus, que nasceu para salvar o mundo e reinar com justiça.
+        Quando o dragão persegue a mulher, Deus a protege e leva para o deserto, mostrando que Ele sempre cuida dos que confiam n’Ele.”
+      </div>
+
+      <div class="fala">
+        <strong>👩 Jovem 3 — Aplicação para nós hoje:</strong><br>
+        “Essa história não é só sobre o passado, mas também fala do presente.
+        O dragão ainda tenta nos enganar e afastar de Deus. Mas Maria e a Igreja continuam nos guiando para Jesus.
+        O Apocalipse 12 nos lembra que a vitória já é de Cristo.
+        Se ficarmos firmes na fé, unidos em oração e confiança em Deus, também participamos dessa vitória.
+        No fim, o bem vence o mal, e nós podemos ter esperança!”
+      </div>
+    
     </section>
 
     <div class="games-grid">
@@ -183,6 +296,8 @@
       </aside>
     </div>
 
+     <!-- <section class="teatro"></section> -->
+    
     <footer>
       <small>Feito para catequese — Conteúdo baseado em Apocalipse 12. <strong>Toque uma aba</strong> para começar a jogar.</small>
     </footer>
@@ -410,3 +525,4 @@
   </script>
 </body>
 </html>
+
