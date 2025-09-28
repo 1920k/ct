@@ -1,870 +1,412 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>A Mulher e o Dragão — Jogos Bíblicos</title>
-
-    <style>
-        :root {
-            :root {
-                --roxo: #6a1b9a;
-                /* Roxo profundo */
-                --roxo-esc: #4527a0;
-                /* Roxo escuro */
-                --amarelo: #ffca28;
-                /* Amarelo dourado */
-                --acinza: #cfd8dc;
-                /* Cinza claro */
-                --verde: #43a047;
-                /* Verde vibrante */
-                --azul: #1e88e5;
-                /* Azul médio */
-                --fundo-gradiente: linear-gradient(135deg, #ede7f6 0%, #e3f2fd 100%);
-                --texto: #2c2c2c;
-            }
-        }
-
-        * {
-            box-sizing: border-box
-        }
-
-        body {
-            margin: 0;
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-            background: linear-gradient(135deg, #f3e7fe 0%, #e3f0ff 100%);
-            color: #333;
-            line-height: 1.55;
-        }
-
-        header {
-            background: linear-gradient(90deg, #4a148c 0%, #6a1b9a 50%, #8e24aa 100%);
-            color: #fff;
-            padding: 32px 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            border-bottom: 4px solid #ffca28;
-
-
-        }
-
-        .header-text {
-            flex: 1;
-            text-align: center;
-            padding: 0 12px;
-
-
-        }
-
-        .header-image {
-            flex: 0 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-        }
-
-        header h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffeb3b;
-            text-shadow: 1px 1px 2px #000;
-            margin: 0;
-
-        }
-
-        .header-image img {
-            width: 7rem;
-            height: 7rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            background: #fff;
-            padding: 6px;
-        }
-
-        header h1 div {
-            font-size: 1rem;
-            color: #fff;
-            font-weight: 400;
-            margin-top: 4px;
-        }
-
-
-        main {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 4vw;
-            width: 100%;
-        }
-
-        section.card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 4vw 3vw;
-            margin: 16px 0;
-            box-shadow: 0 4px 24px #b39ddb55;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            width: 100%;
-            min-width: 0;
-        }
-
-        h2 {
-            color: var(--roxo);
-            margin: 8px 0 16px;
-            text-align: center;
-            font-size: clamp(18px, 2.8vw, 28px)
-        }
-
-        .hint {
-            font-size: .95rem;
-            color: #555;
-            text-align: center;
-            margin: 8px 0 14px
-        }
-
-        /* ===== JOGO DA MEMÓRIA ===== */
-        .memory-grid {
-            display: grid;
-            gap: 10px;
-            margin: 10px auto;
-            width: min(333px, 85vw);
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .card {
-            /* aspect-ratio: 1/1; */
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--azul);
-            color: #000;
-            font-weight: 700;
-            font-size: clamp(14px, 4.5vw, 20px);
-            user-select: none;
-            cursor: pointer;
-            transition: transform .15s, background .15s;
-        }
-
-        .card:active {
-            /* transform: scale(.97) */
-        }
-
-        .card.flipped {
-            background: var(--verde)
-        }
-
-        .card.matched {
-            background: var(--acinza);
-            cursor: default
-        }
-
-        /* ===== CAÇA-PALAVRAS ===== */
-        .ws-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px
-        }
-
-        .ws-grid {
-            display: grid;
-            gap: 4px;
-            width: min(333px, 85vw);
-            grid-template-columns: repeat(10, 1fr);
-        }
-
-        .cell {
-            aspect-ratio: 1/1;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: clamp(14px, 4.2vw, 18px);
-            background: #fff;
-            user-select: none;
-            touch-action: none;
-        }
-
-        .cell.sel {
-            background: #ffeaa7
-        }
-
-        .cell.ok {
-            background: #81ecec
-        }
-
-        .ws-controls {
-            display: flex;
-            gap: 8px;
-            margin-top: 6px
-        }
-
-        .btn {
-            border: none;
-            background: var(--roxo);
-            color: #000;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .btn:disabled {
-            background: #bbb;
-            cursor: not-allowed
-        }
-
-        ul.word-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            padding: 0;
-            margin: 8px 0
-        }
-
-        .word-list li {
-            list-style: none;
-            padding: 6px 10px;
-            border-radius: 8px;
-            background: #f4f4f8;
-            font-weight: 600
-        }
-
-        .word-list li.found {
-            text-decoration: line-through;
-            color: green;
-            background: #eafff0
-        }
-
-
-        /* Responsividade extra para celulares pequenos */
-        @media (max-width: 480px) {
-            header {
-
-                align-items: center;
-                justify-content: center;
-                display: flex;
-                flex-direction: column;
-
-            }
-        }
-
-        h1 {
-            font-size: 1.3em;
-        }
-
-        section.card {
-            padding: 4vw 2vw;
-        }
-
-        .memory-grid {
-            gap: 6px;
-        }
-
-        .ws-grid {
-            gap: 2px;
-        }
-
-        .letters button {
-            padding: 8px 0;
-            min-width: 28px;
-            font-size: 1em;
-        }
-
-        .chip,
-        .ordem-item {
-            font-size: 0.95em;
-            padding: 7px 8px;
-        }
-
-        .header-text {
-            width: 68rem;
-
-        }
-
-        .header-image {
-            height: 5rem;
-        }
-
-        .dropzone {
-            min-width: 48px;
-            font-size: 0.95em;
-        }
-
-
-        .letters button:disabled {
-            background: #ccc
-        }
-
-        .word {
-            font-size: clamp(18px, 4.8vw, 26px);
-            letter-spacing: 8px;
-            margin: 12px 0
-        }
-
-        /* ===== COMPLETE O VERSÍCULO ===== */
-        .dropzone {
-            display: inline-block;
-            min-width: 72px;
-            padding: 4px 6px;
-            border-bottom: 2px dashed var(--roxo);
-            text-align: center
-        }
-
-        .chip {
-            display: inline-block;
-            margin: 6px;
-            padding: 8px 12px;
-            background: var(--roxo);
-            color: #000;
-            border-radius: 999px;
-            cursor: grab;
-            user-select: none;
-        }
-
-
-
-        /* ===== POPUP ===== */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, .5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .popup-content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            width: min(90%, 400px);
-            box-shadow: 0 4px 18px #0005;
-            animation: scaleIn .2s ease;
-            color: black;
-        }
-
-        .popup-content h3 {
-            margin-top: 0;
-            color: var(--roxo)
-        }
-
-        .popup .close {
-            float: right;
-            font-size: 22px;
-            font-weight: 700;
-            cursor: pointer;
-            color: #555;
-        }
-
-        @keyframes scaleIn {
-            from {
-                transform: scale(.8);
-                opacity: 0
-            }
-
-            to {
-                transform: scale(1);
-                opacity: 1
-            }
-        }
-
- .memoria-section {
-    background: linear-gradient(135deg, #f3e5f5, #e8f5e9);
-    padding: 32px;
-    border-radius: 20px;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.memoria-title {
-    font-size: 1.8rem;
-    color: var(--roxo);
-    margin-bottom: 24px;
-    font-weight: 700;
-}
-
-.memoria-doc {
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    margin-bottom: 32px;
-}
-
-.memoria-topicos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
-}
-
-.info-btn {
-    background: var(--roxo);
-    color: #000000;
-    border: none;
-    padding: 12px 16px;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.info-btn:hover {
-    background: var(--roxo-esc);
-    transform: scale(1.05);
-}
-
-.popup-content h3 {
-    font-size: 1.3rem;
-    color: var(--roxo);
-    margin-bottom: 12px;
-}
-
-.popup-content p {
-    font-size: 1rem;
-    color: #333;
-    line-height: 1.6;
-}
-
-        footer {
-            text-align: center;
-            color: #555;
-            padding: 18px 8px;
-            font-size: .95rem
-        }
-         font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      margin: 20px;
-      color: #333;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portal de Minijogos Bíblicos — Apocalipse 12</title>
+  <meta name="description" content="Jogos bíblicos mobile-first: memória, quiz, forca, caça-palavras e sorteio de versículo." />
+  <style>
+    /* =======================
+       Mobile-first + variables
+       ======================= */
+    :root{
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --primary: #6a1b9a;
+      --primary-600: #4527a0;
+      --accent: #ffca28;
+      --muted: #67707d;
+      --success: #43a047;
+      --danger: #e53935;
+      --glass: rgba(255,255,255,0.6);
     }
-    .container {
-      max-width: 800px;
-      margin: auto;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, Roboto, system-ui, -apple-system, 'Segoe UI', Arial;
+      background: linear-gradient(180deg,#fdfbff 0%,var(--bg) 100%);
+      color:#1f2933;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:16px;
     }
-    .titulo {
-      text-align: center;
-      font-size: 28px;
-      margin-bottom: 20px;
-      color: #5a2a82;
+
+    /* header */
+    header.app-header{
+      display:flex;gap:12px;align-items:center;justify-content:space-between;
+      margin-bottom:12px;
     }
-    .fala {
-      background: #fff;
-      border-left: 6px solid #5a2a82;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    .branding{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-600));
+      display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800;font-size:1.1rem;box-shadow:0 6px 18px rgba(106,27,154,0.18)
     }
-    .fala h2 {
-      margin-top: 0;
-      color: #5a2a82;
-      font-size: 20px;
-    }
-    .fala p {
-      margin: 0;
-      font-size: 16px;
-    }
-    </style>
+    h1{font-size:1.05rem;margin:0}
+    p.lead{margin:0;color:var(--muted);font-size:0.9rem}
+
+    /* nav tabs */
+    nav.tabs{display:flex;gap:8px;overflow:auto;padding-bottom:8px;margin:10px 0}
+    .tab{flex:0 0 auto;padding:10px 14px;border-radius:12px;background:var(--card);border:1px solid #eee;cursor:pointer;font-weight:700;color:var(--primary);}
+    .tab.active{background:linear-gradient(90deg,var(--primary),var(--primary-600));color:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+
+    /* card layout */
+    .card{background:var(--card);border-radius:14px;padding:14px;margin-bottom:14px;box-shadow:0 6px 24px rgba(16,24,40,0.06)}
+    h2{font-size:1rem;margin:0 0 8px;color:var(--primary)}
+    .hint{font-size:0.88rem;color:var(--muted);margin-bottom:10px}
+
+    /* responsive grid for games */
+    .games-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:720px){.games-grid{grid-template-columns:1fr 420px}}
+
+    /* memory */
+    .memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;max-width:360px;margin:auto}
+    .m-card{aspect-ratio:1/1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:clamp(18px,4vw,26px);cursor:pointer;user-select:none;background:linear-gradient(180deg,#dbeafe,#bde0ff);color:#06365a;transition:transform .15s,opacity .15s}
+    .m-card.flipped{background:linear-gradient(180deg,#dcedc8,#b7e4c7);color:#083d2a}
+    .m-card.matched{opacity:.6;cursor:default}
+
+    /* quiz */
+    .quiz-question{font-weight:700}
+    .options{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+    .opt{padding:10px;border-radius:10px;border:1px solid #eee;background:#fafafa;cursor:pointer;font-weight:600}
+    .opt.correct{background:linear-gradient(90deg,var(--success),#7bd188);color:#fff}
+    .opt.wrong{background:linear-gradient(90deg,var(--danger),#ff6f62);color:#fff}
+
+    /* hangman/forca */
+    .forca-word{letter-spacing:0.6rem;font-weight:800;font-size:1.1rem}
+    .alpha{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+    .alpha button{padding:8px 10px;border-radius:8px;border:1px solid #eee;background:#fff;cursor:pointer;font-weight:700}
+    .alpha button:disabled{opacity:.5;cursor:default}
+    .status{margin-top:8px;font-weight:700}
+
+    /* wordsearch */
+    .ws-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;max-width:360px}
+    .ws-cell{aspect-ratio:1/1;border-radius:6px;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+    .ws-cell.sel{background:linear-gradient(90deg,#ffe29f,#ffd27a)}
+    .word-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .word-list li{background:#f8f8fb;padding:6px 8px;border-radius:8px;font-weight:700}
+
+    /* verse draw */
+    .verse{font-size:0.98rem;background:linear-gradient(90deg,#fff9e6,#fff5d6);padding:10px;border-radius:10px}
+
+    /* footer */
+    footer{margin-top:10px;text-align:center;color:var(--muted);font-size:0.86rem}
+  </style>
 </head>
-
 <body>
-    <header>
-        <div class="header-image">
-            <img src="./b02c69_176c18de92984b14be5dca00ca71b4c3_mv2-removebg-preview.png" alt=""
-                style="width: 8rem; height: 8rem; margin: 0 2rem;">
-        </div>
-        <div class="header-text">
-            <h1>A Mulher e o Dragão <div style="color: #ffffff; font: 0.80em sans-serif;">Apocalipse 12</div>
-            </h1>
-        </div>
-
-    </header>
-
-    <main>
-
-        <!-- ====================== infomacional ====================== -->
-
-<section class="card memoria-section" id="memoria">
-    <div class=".">
-        <iframe src="https://1drv.ms/w/c/49ce18f06708f0a0/IQR_jyX00nWYQI0gSF69zcQNAaTeuSLoi2NDM3cEjUQYJL0?wdStartOn=1" width="388px" height="288px" frameborder="0">Este é um documento do <a target="_blank" href="https://office.com">Microsoft Office</a> incorporado, da plataforma <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+  <header class="app-header">
+    <div class="branding">
+      <div class="logo" aria-hidden>AJ</div>
+      <div>
+        <h1>Portal de Minijogos Bíblicos</h1>
+        <p class="lead">Aprenda sobre Apocalipse 12 com jogos educativos — feito para celular.</p>
+      </div>
     </div>
-
-    <h2 class="memoria-title">🔍 Explore os Símbolos do Apocalipse 12</h2>
-
-    <div class="memoria-topicos">
-        <button class="info-btn" onclick="openPopup('memoriaInfo1')">🌞 Mulher Vestida de Sol</button>
-        <button class="info-btn" onclick="openPopup('memoriaInfo2')">✨ Medalha Milagrosa</button>
-        <button class="info-btn" onclick="openPopup('memoriaInfo3')">🌟 Visão Espiritual Integrada</button>
-        <button class="info-btn" onclick="openPopup('memoriaInfo4')">🐉 O Dragão Vermelho</button>
-        <button class="info-btn" onclick="openPopup('memoriaInfo5')">👶 O Filho do Céu</button>
-        <button class="info-btn" onclick="openPopup('memoriaInfo6')">🌵 Fuga para o Deserto</button>
-        <button class="info-btn" onclick="openPopup('memoriaInfo7')">💫 Nossa Senhora das Graças</button>
+    <div style="text-align:right">
+      <small style="color:var(--muted)">Versículos: Ap 12 | Criado para catequese</small>
     </div>
+  </header>
 
-    <!-- Popups seguem o mesmo padrão -->
-    <div class="popup" id="memoriaInfo1">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup('memoriaInfo1')">&times;</span>
-            <h3>🌞 Mulher Vestida de Sol</h3>
-            <p>Com a lua sob os pés e coroa de 12 estrelas, representa Maria e a Igreja, sinalizando vitória sobre o mal.</p>
+  <nav class="tabs" role="tablist" aria-label="Navegação de jogos">
+    <button class="tab active" data-tab="home" role="tab" aria-selected="true">Início</button>
+    <button class="tab" data-tab="memoria" role="tab">Memória</button>
+    <button class="tab" data-tab="quiz" role="tab">Quiz</button>
+    <button class="tab" data-tab="forca" role="tab">Forca</button>
+    <button class="tab" data-tab="caca" role="tab">Caça‑palavras</button>
+    <button class="tab" data-tab="verso" role="tab">Sorteio de Versículo</button>
+  </nav>
+
+  <main>
+    <section id="view-home" class="card" role="region" aria-labelledby="home-title">
+      <h2 id="home-title">Bem-vindo!</h2>
+      <p class="hint">Escolha um jogo na barra acima. Cada atividade tem instruções simples e é pensada para crianças e jovens da catequese — curta e compartilhe!</p>
+      <div class="card" style="margin-top:10px">
+        <h3 style="margin:0 0 8px">Como usar</h3>
+        <ol style="padding-left:18px;margin:0;color:var(--muted)">
+          <li>Toque em uma aba para abrir o jogo.</li>
+          <li>Siga as instruções do jogo — tudo funciona no celular.</li>
+          <li>Use o botão "Reiniciar" em cada jogo para jogar outra vez.</li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="games-grid">
+      <section id="view-memoria" class="card" role="region" aria-labelledby="memoria-title" hidden>
+        <h2 id="memoria-title">🧠 Jogo da Memória</h2>
+        <p class="hint">Encontre pares de símbolos e personagens do capítulo 12. Toque nas cartas para virar.</p>
+        <div style="display:flex;gap:10px;align-items:center;justify-content:center;margin-bottom:10px;flex-wrap:wrap">
+          <button class="tabbtn btn" id="memReset">🔁 Reiniciar</button>
+          <div style="color:var(--muted);font-weight:700">Pares encontrados: <span id="memScore">0</span>/<span id="memTotal">0</span></div>
         </div>
-    </div>
-     <h2>
-               
-            </h2>
-            <div class="popup" id="memoriaInfo7">
-                <div class="popup-content">
-                    <span class="close" onclick="closePopup('memoriaInfo7')">&times;</span>
-                    <p>
-                        Nossa Senhora das Graças apareceu a Santa Catarina Labouré em 1830, pedindo que fosse criada a
-                        Medalha Milagrosa.
-                        Na medalha, Maria aparece sobre o globo, esmagando a serpente, com raios de luz saindo de suas
-                        mãos, simbolizando as graças que concede.
-                        Representa intercessão, proteção e condução espiritual para os fiéis.
-                    </p>
-                </div>
-            </div>
-            <!-- 4️⃣ O Dragão Vermelho -->
-            
-            <div class="popup" id="memoriaInfo4">
-                <div class="popup-content">
-                    <span class="close" onclick="closePopup('memoriaInfo4')">&times;</span>
-                    <p>
-                        Representa Satanás, inimigo da humanidade. Tenta destruir o filho da mulher e impedir o plano de
-                        Deus.
-                        Símbolo de mal, engano e perseguição espiritual.
-                        A batalha entre a mulher e o dragão mostra a vitória de Deus e a proteção sobre os fiéis.
-                    </p>
-                </div>
-            </div>
+        <div class="memory-grid" id="memoryGrid" aria-live="polite"></div>
+      </section>
 
-            <!-- 5️⃣ O Filho do Céu -->
-       
-            <div class="popup" id="memoriaInfo5">
-                <div class="popup-content">
-                    <span class="close" onclick="closePopup('memoriaInfo5')">&times;</span>
-                    <p>
-                        O filho que há de reger todas as nações com cetro de ferro é uma referência a Jesus Cristo.
-                        Ele representa justiça, liderança divina e esperança.
-                        Sua proteção e vitória sobre o dragão simbolizam a salvação da humanidade.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 6️⃣ Fuga para o Deserto -->
-          
-            <div class="popup" id="memoriaInfo6">
-                <div class="popup-content">
-                    <span class="close" onclick="closePopup('memoriaInfo6')">&times;</span>
-                    <p>
-                        A mulher foge para o deserto, protegida por Deus.
-                        Símbolo de refúgio, perseverança e cuidado divino em tempos de perseguição.
-                        Ensina que mesmo nas dificuldades, a fé garante proteção e força espiritual.
-                    </p>
-                </div>
-            </div>
-
-            <h2>
-                <button class="info-btn" onclick="openPopup('memoriaInfo1')">
-                    ℹ Mulher Vestida de Sol
-                </button>
-            </h2>
-            <div class="popup" id="memoriaInfo1">
-                <div class="popup-content">
-                    <span class="close" onclick="closePopup('memoriaInfo1')">&times;</span>
-                    <p>
-                        Mulher vestida de sol, com a lua sob os pés e uma coroa de 12 estrelas. Grávida, prestes a dar à
-                        luz, enfrenta o dragão vermelho que tenta devorar seu filho.
-                        O filho regerá todas as nações com cetro de ferro — referência messiânica a Jesus Cristo.
-                        A mulher foge para o deserto, protegida por Deus.
-                        Interpretação: representa Maria e a Igreja, sinalizando vitória sobre o mal.
-                    </p>
-                </div>
-            </div>
-
-            <!-- 2️⃣ Medalha Milagrosa -->
-            
-            <div class="popup" id="memoriaInfo2">
-                <div class="popup-content">
-                    <span class="close" onclick="closePopup('memoriaInfo2')">&times;</span>
-                    <p>
-                        Surgiu em 1830, quando Maria apareceu a Santa Catarina Labouré.
-                        Frente: Maria sobre o globo, esmagando a serpente, com raios de luz saindo de suas mãos,
-                        inscrição “Ó Maria concebida sem pecado...”.
-                        Verso: M entrelaçado com cruz, dois corações (Jesus e Maria), 12 estrelas.
-                        Significado: intercessão de Maria, proteção, graças e sinal da presença de Deus.
-                    </p>
-                </div>
-            </div>
-</section>
-           
-
-
-
-
-
-
-        <!-- ====================== MEMÓRIA ====================== -->
-        <section class="card" id="memoria">
-            <h2>🎴 Jogo da Memória</h2>
-            <p class="hint">Encontre os pares. Cartas erradas viram de volta 😉</p>
-            <div class="memory-grid" id="memoryGrid" aria-label="Jogo da memória"></div>
-            <p id="memoryMsg" class="hint" style="font-weight:700"></p>
+      <aside style="min-width:0">
+        <section id="view-quiz" class="card" role="region" aria-labelledby="quiz-title" hidden>
+          <h2 id="quiz-title">❓ Quiz Bíblico</h2>
+          <p class="hint">Responda perguntas curtas sobre Apocalipse 12. Toque em uma opção para marcar.</p>
+          <div id="quizBox"></div>
+          <div style="display:flex;gap:8px;margin-top:10px;justify-content:flex-end">
+            <button class="btn" id="quizReset">Reiniciar Quiz</button>
+          </div>
         </section>
 
-        <!-- ====================== CAÇA-PALAVRAS ====================== -->
-        <section class="card" id="caca">
-            <h2>🔤 Caça-palavras</h2>
-            <p class="hint">Toque/clique nas letras em sequência para formar palavras. Use “Limpar” para recomeçar.</p>
-            <div class="ws-wrap">
-                <div class="ws-grid" id="wsGrid" aria-label="Caça-palavras"></div>
-                <div class="ws-controls">
-                    <button class="btn" id="wsClear">Limpar</button>
-                    <div id="wsCurrent" style="font-weight:700"></div>
-                </div>
-                <ul class="word-list" id="wsList"></ul>
-            </div>
+        <section id="view-forca" class="card" role="region" aria-labelledby="forca-title" hidden>
+          <h2 id="forca-title">🔤 Forca (Hangman)</h2>
+          <p class="hint">Descubra a palavra — letras bíblicas relacionadas ao capítulo 12.</p>
+          <div class="forca-word" id="forcaWord">_ _ _ _</div>
+          <div class="alpha" id="alpha"></div>
+          <div class="status" id="forcaStatus"></div>
+          <div style="display:flex;gap:8px;margin-top:10px;justify-content:flex-end">
+            <button class="btn" id="forcaReset">Nova Palavra</button>
+          </div>
         </section>
 
-
-
-        <!-- ====================== COMPLETE O VERSÍCULO ====================== -->
-        <section class="card" id="verso">
-            <h2>📌 Complete o Versículo</h2>
-            <p class="hint">Arraste as palavras certas para os espaços.</p>
-            <p>
-                “E houve guerra no <span class="dropzone" data-word="céu"></span>:
-                Miguel e os seus anjos batalhavam contra o <span class="dropzone" data-word="dragão"></span>.” (Ap 12:7)
-            </p>
-            <div id="verseOptions">
-                <span class="chip" draggable="true">céu</span>
-                <span class="chip" draggable="true">dragão</span>
-                <span class="chip" draggable="true">mulher</span>
-            </div>
-            <p id="verseMsg" class="hint" style="font-weight:700"></p>
+        <section id="view-caca" class="card" role="region" aria-labelledby="caca-title" hidden>
+          <h2 id="caca-title">🔎 Caça‑palavras</h2>
+          <p class="hint">Toque nas letras em sequência para formar as palavras listadas.</p>
+          <div id="wsGrid" class="ws-grid" aria-hidden="false"></div>
+          <ul class="word-list" id="wsWords"></ul>
+          <div style="display:flex;gap:8px;margin-top:10px;justify-content:flex-end">
+            <button class="btn" id="wsReset">Gerar Nova Grade</button>
+          </div>
         </section>
 
-  <div>
-    <p><div class="container">
-    <h1 class="titulo">A Mulher e o Dragão (Apocalipse 12)</h1>
-
-    <div class="fala">
-      <h2>👩 Jovem 1 — Introdução</h2>
-      <p>"Hoje nós vamos falar sobre uma visão muito importante da Bíblia, que está no Apocalipse capítulo 12: <i>A Mulher e o Dragão</i>.<br>
-      Essa passagem é cheia de símbolos. Cada um deles nos ajuda a entender a luta entre o bem e o mal e como Deus cuida de nós. Vamos conhecer esses símbolos juntos."</p>
+        <section id="view-verso" class="card" role="region" aria-labelledby="verso-title" hidden>
+          <h2 id="verso-title">🎲 Sorteio de Versículo</h2>
+          <p class="hint">Toque para sortear um versículo curto ligado à mensagem de proteção e vitória.</p>
+          <div class="verse" id="verseBox">Toque em "Sortear" para receber um versículo.</div>
+          <div style="display:flex;gap:8px;margin-top:10px;justify-content:flex-end">
+            <button class="btn" id="drawVerse">Sortear</button>
+          </div>
+        </section>
+      </aside>
     </div>
-
-    <div class="fala">
-      <h2>👦 Jovem 2 — Explicando os símbolos</h2>
-      <p>"A mulher vestida de sol representa Maria e também a Igreja.<br>
-      Ela está com a lua debaixo dos pés e uma coroa de doze estrelas — isso mostra a vitória que Deus dá ao Seu povo.<br>
-      O dragão vermelho é o símbolo do inimigo, Satanás, que tenta destruir o filho da mulher.<br>
-      Esse filho é Jesus, que nasceu para salvar o mundo e reinar com justiça.<br>
-      Quando o dragão persegue a mulher, Deus a protege e leva para o deserto, mostrando que Ele sempre cuida dos que confiam n’Ele."</p>
-    </div>
-
-    <div class="fala">
-      <h2>👩 Jovem 3 — Aplicação para nós hoje</h2>
-      <p>"Essa história não é só sobre o passado, mas também fala do presente.<br>
-      O dragão ainda tenta nos enganar e afastar de Deus. Mas Maria e a Igreja continuam nos guiando para Jesus.<br>
-      O Apocalipse 12 nos lembra que a vitória já é de Cristo.<br>
-      Se ficarmos firmes na fé, unidos em oração e confiança em Deus, também participamos dessa vitória.<br>
-      No fim, o bem vence o mal, e nós podemos ter esperança!"</p>
-    </div>
-  </div></p>
-  </div>
-
-    </main>
 
     <footer>
-        <strong>Versículos:</strong> Gênesis 3:15 • Apocalipse 12:7 • Apocalipse 12:17
+      <small>Feito para catequese — Conteúdo baseado em Apocalipse 12. <strong>Toque uma aba</strong> para começar a jogar.</small>
     </footer>
+  </main>
 
-    <script>
-        /* ======================= UTIL ======================= */
-        function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; }
-        /* ======================= MEMÓRIA ======================= */
-        (function () {
-            const symbols = ["☀️", "🌙", "⭐", "🐉", "👑", "👩", "👼", "🌵"];
-            const deck = shuffle([...symbols, ...symbols]);
-            const grid = document.getElementById('memoryGrid');
-            const msg = document.getElementById('memoryMsg');
+  <script>
+    /* ======================================================
+       Data / assets (fácil de editar)
+       ====================================================== */
+    const MEM_SYMBOLS = ["☀️","🌙","⭐","🐉","👑","👩","👼","🌵"];
+    const QUIZ = [
+      {q:'Quem luta contra o dragão em Apocalipse 12?', opts:['Miguel','Gabriel','Rafael','Pedro'], a:0, explain:'Miguel é o arcanjo que lidera a batalha contra o dragão.'},
+      {q:'O que a mulher tem sobre a cabeça?', opts:['12 estrelas','7 selos','uma espada','um manto'], a:0, explain:'A coroa de 12 estrelas aparece na visão.'},
+      {q:'Para onde a mulher foge?', opts:['Para o deserto','Para a cidade','Para o mar','Para a montanha'], a:0, explain:'A mulher foge para o deserto, onde é protegida.'}
+    ];
+    const HANG_WORDS = ['MULHER','DRAGAO','MIGUEL','DESERTO','ESTRELAS'];
+    const WS_WORDS = ['JESUS','MARIA','DRAGAO','MIGUEL','DESERTO','ESTRELAS'];
+    const VERSES = [
+      '"E houve guerra no céu..." — Ap 12:7',
+      '"A mulher fugiu para o deserto..." — Ap 12:6',
+      '"O dragão foi lançado..." — Ap 12:9',
+      '"Pois que lhes foi dado o poder..." — Ap 12:10'
+    ];
 
-            let first = null, second = null, lock = false, matches = 0;
+    /* ======================================================
+       Simple tab system
+       ====================================================== */
+    document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});
+      btn.classList.add('active');btn.setAttribute('aria-selected','true');
+      const tab = btn.dataset.tab;
+      // show/hide views
+      document.querySelectorAll('[id^="view-"]').forEach(v=> v.hidden = true);
+      const sel = document.getElementById('view-'+tab) || document.getElementById('view-home');
+      sel.hidden = false;
+      // small focus for accessibility
+      sel.querySelector('button, [tabindex], input, .m-card')?.focus?.();
+    }));
 
-            deck.forEach(val => {
-                const c = document.createElement('button');
-                c.type = "button";
-                c.className = 'card';
-                c.setAttribute('aria-label', 'carta');
-                c.dataset.value = val;
-                c.textContent = "?";
-                c.addEventListener('click', onFlip, { passive: true });
-                grid.appendChild(c);
-            });
+    /* ======================================================
+       MEMORY - optimized logic
+       ====================================================== */
+    const memGrid = document.getElementById('memoryGrid');
+    const memScore = document.getElementById('memScore');
+    const memTotal = document.getElementById('memTotal');
+    document.getElementById('memReset').addEventListener('click', initMemory);
 
-            function onFlip() {
-                if (lock) return;
-                if (this.classList.contains('flipped') || this.classList.contains('matched')) return;
+    function initMemory(){
+      memGrid.innerHTML = '';
+      const symbols = shuffle([...MEM_SYMBOLS, ...MEM_SYMBOLS]);
+      memTotal.textContent = MEM_SYMBOLS.length;
+      memScore.textContent = '0';
+      let first = null, lock = false, found = 0;
+      symbols.forEach((val,i)=>{
+        const btn = document.createElement('button');
+        btn.className = 'm-card'; btn.dataset.value = val; btn.type='button'; btn.setAttribute('aria-label','Carta'); btn.textContent='?';
+        btn.addEventListener('click', ()=>{
+          if(lock || btn.classList.contains('flipped') || btn.classList.contains('matched')) return;
+          btn.classList.add('flipped'); btn.textContent = val;
+          if(!first){ first = btn; return; }
+          // second flip
+          if(first.dataset.value === btn.dataset.value){
+            first.classList.add('matched'); btn.classList.add('matched'); found++; memScore.textContent = String(found);
+            first=null;
+          } else {
+            lock = true; setTimeout(()=>{ first.classList.remove('flipped'); first.textContent='?'; btn.classList.remove('flipped'); btn.textContent='?'; first=null; lock=false }, 700);
+          }
+        });
+        memGrid.appendChild(btn);
+      });
+    }
+    initMemory();
 
-                this.classList.add('flipped');
-                this.textContent = this.dataset.value;
+    /* ======================================================
+       QUIZ
+       ====================================================== */
+    const quizBox = document.getElementById('quizBox');
+    function renderQuiz(){
+      quizBox.innerHTML = '';
+      QUIZ.forEach((q,i)=>{
+        const wrap = document.createElement('div');
+        wrap.className = 'card';
+        const qEl = document.createElement('div'); qEl.className='quiz-question'; qEl.textContent = `${i+1}. ${q.q}`;
+        wrap.appendChild(qEl);
+        const opts = document.createElement('div'); opts.className='options';
+        q.opts.forEach((o,oi)=>{
+          const b = document.createElement('button'); b.className='opt'; b.type='button'; b.textContent = o;
+          b.addEventListener('click', ()=>{
+            // disable siblings
+            [...opts.children].forEach(c=>c.disabled = true);
+            if(oi === q.a){ b.classList.add('correct'); }
+            else { b.classList.add('wrong'); opts.children[q.a].classList.add('correct'); }
+            // show explanation
+            const ex = document.createElement('div'); ex.style.marginTop='8px'; ex.style.color='var(--muted)'; ex.textContent = q.explain || '';
+            wrap.appendChild(ex);
+          });
+          opts.appendChild(b);
+        });
+        wrap.appendChild(opts);
+        quizBox.appendChild(wrap);
+      });
+    }
+    document.getElementById('quizReset').addEventListener('click', renderQuiz);
+    renderQuiz();
 
-                if (!first) { first = this; return; }
-                second = this;
+    /* ======================================================
+       FORCA (Hangman) - simple
+       ====================================================== */
+    const forcaWordEl = document.getElementById('forcaWord');
+    const alphaEl = document.getElementById('alpha');
+    const forcaStatus = document.getElementById('forcaStatus');
+    let secret = '';
+    function initForca(){
+      secret = HANG_WORDS[Math.floor(Math.random()*HANG_WORDS.length)];
+      window.forcaState = {display: Array(secret.length).fill('_'), tries:6, used:[]};
+      renderForca();
+    }
+    function renderForca(){
+      forcaWordEl.textContent = window.forcaState.display.join(' ');
+      alphaEl.innerHTML = '';
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(ch=>{
+        const b = document.createElement('button'); b.textContent=ch; b.disabled = window.forcaState.used.includes(ch);
+        b.addEventListener('click', ()=>{
+          if(window.forcaState.used.includes(ch)) return; window.forcaState.used.push(ch);
+          if(secret.includes(ch)){
+            secret.split('').forEach((c,i)=>{ if(c===ch) window.forcaState.display[i]=c });
+          } else { window.forcaState.tries--; }
+          // update
+          renderForca();
+        });
+        alphaEl.appendChild(b);
+      });
+      forcaStatus.textContent = `Tentativas restantes: ${window.forcaState.tries}`;
+      if(!window.forcaState.display.includes('_')){ forcaStatus.textContent = '🎉 Você venceu!'; disableAlpha(); }
+      if(window.forcaState.tries <=0){ forcaStatus.textContent = `☠️ Perdeu — palavra: ${secret}`; disableAlpha(); }
+    }
+    function disableAlpha(){ [...alphaEl.querySelectorAll('button')].forEach(b=>b.disabled=true) }
+    document.getElementById('forcaReset').addEventListener('click', initForca);
+    initForca();
 
-                if (first.dataset.value === second.dataset.value) {
-                    // acerto
-                    first.classList.add('matched'); second.classList.add('matched');
-                    first.setAttribute('disabled', ''); second.setAttribute('disabled', '');
-                    first = null; second = null; matches++;
-                    if (matches === symbols.length) { msg.textContent = "🎉 Parabéns! Você encontrou todos os pares."; }
-                } else {
-                    // erro -> esconder depois de 800ms (com bloqueio)
-                    lock = true;
-                    setTimeout(() => {
-                        [first, second].forEach(el => {
-                            el.classList.remove('flipped');
-                            el.textContent = "?";
-                        });
-                        first = null; second = null; lock = false;
-                    }, 800);
-                }
-            }
-        })();
+    /* ======================================================
+       CAÇA-PALAVRAS (Wordsearch) - simple place horiz/vert/backwards
+       ====================================================== */
+    const wsGrid = document.getElementById('wsGrid');
+    const wsWordsEl = document.getElementById('wsWords');
+    document.getElementById('wsReset').addEventListener('click', ()=> generateWS(WS_WORDS));
 
-        /* ======================= CAÇA-PALAVRAS ======================= */
-        (function () {
-            const palavras = ["JESUS", "MARIA", "ROSARIO", "FE", "ORACAO", "EVANGELHO"];
-            const size = 10;
-            const gridArr = Array(size * size).fill('');
-            const gridEl = document.getElementById('wsGrid');
-            const listEl = document.getElementById('wsList');
-            const curEl = document.getElementById('wsCurrent');
-            const clearBtn = document.getElementById('wsClear');
-
-            // posiciona palavra horizontal ou vertical simples
-            function place(word) {
-                word = word.toUpperCase();
-                let ok = false, guard = 0;
-                while (!ok && guard < 500) {
-                    guard++;
-                    const horiz = Math.random() < 0.5;
-                    const row = Math.floor(Math.random() * size);
-                    const col = Math.floor(Math.random() * size);
-                    if (horiz && col + word.length <= size) {
-                        let fits = true;
-                        for (let i = 0; i < word.length; i++) {
-                            const idx = row * size + (col + i);
-                            if (gridArr[idx] && gridArr[idx] !== word[i]) { fits = false; break; }
-                        }
-                        if (fits) { for (let i = 0; i < word.length; i++) { gridArr[row * size + (col + i)] = word[i]; } ok = true; }
-                    } else if (!horiz && row + word.length <= size) {
-                        let fits = true;
-                        for (let i = 0; i < word.length; i++) {
-                            const idx = (row + i) * size + col;
-                            if (gridArr[idx] && gridArr[idx] !== word[i]) { fits = false; break; }
-                        }
-                        if (fits) { for (let i = 0; i < word.length; i++) { gridArr[(row + i) * size + col] = word[i]; } ok = true; }
-                    }
-                }
-            }
-            palavras.forEach(place);
-            // completa com letras aleatórias
-            for (let i = 0; i < gridArr.length; i++) {
-                if (!gridArr[i]) gridArr[i] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-            }
-
-            // monta UI
-            let current = "", currentCells = [];
-            function updateCurrent() { curEl.textContent = "Atual: " + (current || "—"); }
-            function clearSel() {
-                current = ""; currentCells.forEach(c => c.classList.remove('sel')); currentCells = [];
-                updateCurrent();
-            }
-
-            // lista de palavras
-            palavras.forEach(p => {
-                const li = document.createElement('li'); li.textContent = p; listEl.appendChild(li);
-            });
-
-            gridArr.forEach((ch, idx) => {
-                const cell = document.createElement('div'); cell.className = 'cell'; cell.textContent = ch;
-                cell.addEventListener('click', () => {
-                    // evita selecionar a mesma célula duas vezes seguidas
-                    if (currentCells[currentCells.length - 1] === cell) return;
-                    cell.classList.add('sel'); currentCells.push(cell); current += ch; updateCurrent();
-
-                    // acerto (frente ou reverso)
-                    const hit = palavras.includes(current) || palavras.includes(current.split('').reverse().join(''));
-                    if (hit) {
-                        currentCells.forEach(c => { c.classList.remove('sel'); c.classList.add('ok'); });
-                        // risca na lista
-                        [...listEl.children].forEach(li => {
-                            if (li.textContent === current || li.textContent === current.split('').reverse().join('')) li.classList.add('found');
-                        });
-                        current = ""; currentCells = []; updateCurrent();
-                    }
-                }, { passive: true });
-                gridEl.appendChild(cell);
-            });
-
-            clearBtn.addEventListener('click', clearSel);
-            updateCurrent();
-        })();
-
-
-        /* ======================= COMPLETE O VERSÍCULO ======================= */
-        (function () {
-            const chips = document.querySelectorAll('#verseOptions .chip');
-            const drops = document.querySelectorAll('.dropzone');
-            const msg = document.getElementById('verseMsg');
-
-            chips.forEach(ch => {
-                ch.addEventListener('dragstart', e => e.dataTransfer.setData('text/plain', ch.textContent));
-            });
-            drops.forEach(d => {
-                d.addEventListener('dragover', e => e.preventDefault());
-                d.addEventListener('drop', e => {
-                    e.preventDefault();
-                    const t = e.dataTransfer.getData('text/plain');
-                    if (t === d.dataset.word) {
-                        d.textContent = t; d.style.color = 'green';
-                        // feedback final
-                        const allOk = [...drops].every(x => x.textContent.trim().length > 0);
-                        if (allOk) msg.textContent = "✅ Muito bem! Versículo completo.";
-                    } else {
-                        d.style.color = 'red';
-                        setTimeout(() => { d.style.color = ''; }, 600);
-                    }
-                });
-            });
-        })();
-
-        function openPopup(id) {
-            document.getElementById(id).style.display = "flex";
+    function generateWS(words){
+      const size = 10;
+      // create empty grid
+      let grid = Array.from({length:size},()=>Array.from({length:size},()=>' '));
+      function placeWord(w){
+        w = w.toUpperCase();
+        const attempts=500; let ok=false;
+        for(let t=0;t<attempts && !ok;t++){
+          const dir = Math.random()<0.5? 'H':'V';
+          const rev = Math.random()<0.5;
+          const ww = rev? [...w].reverse().join(''): w;
+          const row = Math.floor(Math.random()*size);
+          const col = Math.floor(Math.random()*size);
+          if(dir==='H' && col+ww.length<=size){
+            let fits=true; for(let i=0;i<ww.length;i++){ const cur = grid[row][col+i]; if(cur!==' ' && cur!==ww[i]){fits=false;break} }
+            if(fits){ for(let i=0;i<ww.length;i++) grid[row][col+i]=ww[i]; ok=true; break }
+          }
+          if(dir==='V' && row+ww.length<=size){
+            let fits=true; for(let i=0;i<ww.length;i++){ const cur = grid[row+i][col]; if(cur!==' ' && cur!==ww[i]){fits=false;break} }
+            if(fits){ for(let i=0;i<ww.length;i++) grid[row+i][col]=ww[i]; ok=true; break }
+          }
         }
-        function closePopup(id) {
-            document.getElementById(id).style.display = "none";
-        }
-        
+        return ok;
+      }
+      // try place all
+      words.forEach(w=>{ if(!placeWord(w)) console.warn('não colocou',w) });
+      // fill
+      for(let r=0;r<size;r++) for(let c=0;c<size;c++) if(grid[r][c]===' ') grid[r][c] = String.fromCharCode(65+Math.floor(Math.random()*26));
+      // render
+      wsGrid.innerHTML=''; wsGrid.style.gridTemplateColumns = `repeat(${size},1fr)`;
+      const cells = [];
+      for(let r=0;r<size;r++) for(let c=0;c<size;c++){
+        const div = document.createElement('div'); div.className='ws-cell'; div.textContent = grid[r][c]; div.dataset.r=r; div.dataset.c=c;
+        wsGrid.appendChild(div); cells.push(div);
+      }
+      // list
+      wsWordsEl.innerHTML = '';
+      words.forEach(w=>{ const li = document.createElement('li'); li.textContent = w.toUpperCase(); wsWordsEl.appendChild(li) });
 
-    </script>
+      // selection support (simple contiguous selection only horizontal/vertical)
+      let selecting = false; let selCells = [];
+      wsGrid.querySelectorAll('.ws-cell').forEach(cell=>{
+        cell.addEventListener('touchstart', startEvt, {passive:true}); cell.addEventListener('mousedown', startEvt);
+        function startEvt(e){ selecting=true; clearSel(); select(cell); }
+        cell.addEventListener('touchmove', moveEvt, {passive:true}); cell.addEventListener('mousemove', moveEvt);
+        function moveEvt(e){ if(!selecting) return; const el = document.elementFromPoint((e.touches?e.touches[0].clientX:e.clientX),(e.touches?e.touches[0].clientY:e.clientY)); if(el && el.classList.contains('ws-cell') && !selCells.includes(el)) select(el); }
+        cell.addEventListener('touchend', endEvt); cell.addEventListener('mouseup', endEvt);
+        function endEvt(){ selecting=false; checkSelection(); }
+      });
+      function select(el){ el.classList.add('sel'); selCells.push(el); }
+      function clearSel(){ selCells.forEach(s=>s.classList.remove('sel')); selCells=[]; }
+      function checkSelection(){ const word = selCells.map(s=>s.textContent).join(''); const rword = [...word].reverse().join('');
+        const wordsUp = words.map(w=>w.toUpperCase()); if(wordsUp.includes(word) || wordsUp.includes(rword)){
+          // mark found
+          selCells.forEach(s=>s.classList.add('sel','found'));
+          [...wsWordsEl.children].forEach(li=>{ if(li.textContent===word||li.textContent===rword) li.style.textDecoration='line-through' });
+        }
+        setTimeout(()=>{ clearSel() },250);
+      }
+    }
+    generateWS(WS_WORDS);
+
+    /* ======================================================
+       VERSE DRAW
+       ====================================================== */
+    document.getElementById('drawVerse').addEventListener('click', ()=>{
+      const v = VERSES[Math.floor(Math.random()*VERSES.length)]; document.getElementById('verseBox').textContent = v;
+    });
+
+    /* ======================================================
+       Utilities
+       ====================================================== */
+    function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] } return a }
+
+    // start with Home visible; tabs already set. ensure home shown
+    document.querySelectorAll('[id^="view-"]').forEach(v=> v.hidden = true);
+    document.getElementById('view-home').hidden = false;
+  </script>
 </body>
-
 </html>
